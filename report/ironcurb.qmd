@@ -1,0 +1,266 @@
+---
+title: "Project IRONCURB: Shared Container Waste Collection for DC"
+subtitle: "Feasibility Analysis of a Barcelona-Style System"
+author: "DC Garbage Collection Reform Analysis"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    theme: cosmo
+    embed-resources: true
+execute:
+  echo: false
+  warning: false
+params:
+  distance_threshold: 500
+  pickup_frequency: 3
+  growth_scenario: 0.25
+---
+
+```{python}
+#| label: setup
+import pandas as pd
+import numpy as np
+import json
+from pathlib import Path
+import geopandas as gpd
+
+# Load analysis results
+data_dir = Path("../data/processed")
+
+with open(data_dir / "placement_summary.json") as f:
+    placement = json.load(f)
+
+with open(data_dir / "capacity_analysis.json") as f:
+    capacity = json.load(f)
+
+with open(data_dir / "cost_analysis.json") as f:
+    cost = json.load(f)
+
+# Extract key metrics
+n_containers = int(placement["overall"]["total_containers"])
+n_addresses = int(placement["overall"]["total_addresses_covered"])
+n_households = capacity["assumptions"]["population"]["total_households"]
+avg_distance = placement["overall"]["avg_max_distance_ft"]
+```
+
+## Executive Summary
+
+This analysis evaluates transitioning Washington, DC from individual curbside trash collection to a **shared container system** modeled after Barcelona's successful program. Key findings:
+
+- **`{python} f"{n_containers:,}"`** shared containers would serve **`{python} f"{n_addresses:,}"`** addresses
+- Average maximum walking distance: **`{python} f"{avg_distance:.0f}"` feet**
+- Annual operating savings: **$`{python} f"{(cost['current_system_costs']['annual_costs']['total'] - cost['annual_operating_costs']['total_annual_operating'])/1e6:.1f}`M**
+- Capital investment payback: **`{python} f"{cost['capital_costs']['total_capital_cost'] / (cost['current_system_costs']['annual_costs']['total'] - cost['annual_operating_costs']['total_annual_operating']):.1f}"` years**
+
+## 1. Background
+
+### Current System
+
+DC's existing residential waste collection operates on a property-by-property basis:
+
+- Each household receives 1-3 trash cans (96-gallon "SuperCans") and recycling carts
+- Collection requires crews of 3 workers per truck (driver + 2 collectors)
+- Trash collected twice weekly; recycling once weekly
+
+### Proposed System
+
+The shared container model places 2-3 large containers per city block:
+
+- Residents walk to shared containers for trash, recycling, and compost
+- Automated trucks with single driver collect containers
+- Capacity scales by increasing pickup frequency
+
+## 2. Container Placement Analysis
+
+```{python}
+#| label: placement-summary
+placement_df = pd.DataFrame([
+    {"Metric": "Total Blocks Analyzed", "Value": f"{placement['overall']['total_blocks']:,}"},
+    {"Metric": "Active Blocks (with containers)", "Value": f"{placement['overall']['active_blocks']:,}"},
+    {"Metric": "Skipped Blocks (insufficient addresses)", "Value": f"{placement['overall']['skipped_blocks']:,}"},
+    {"Metric": "Total Containers Placed", "Value": f"{n_containers:,}"},
+    {"Metric": "Average Containers per Block", "Value": f"{placement['overall']['avg_containers_per_block']:.1f}"},
+    {"Metric": "Average Max Walking Distance", "Value": f"{avg_distance:.0f} ft"},
+    {"Metric": "Worst Case Walking Distance", "Value": f"{placement['overall']['max_max_distance_ft']:.0f} ft"},
+])
+```
+
+### Overall Placement Statistics
+
+```{python}
+#| label: tbl-placement
+#| tbl-cap: "Container Placement Summary"
+from IPython.display import Markdown
+Markdown(placement_df.to_markdown(index=False))
+```
+
+### Compliance by Distance Threshold
+
+The system was evaluated against three walking distance thresholds:
+
+```{python}
+#| label: threshold-compliance
+threshold_data = []
+for threshold, data in placement["by_threshold"].items():
+    threshold_data.append({
+        "Threshold": threshold,
+        "Compliant Blocks": f"{data['compliant_blocks']:,}",
+        "Non-Compliant Blocks": f"{data['non_compliant_blocks']:,}",
+        "Compliance Rate": f"{data['compliance_rate']*100:.1f}%",
+        "Address Violations": f"{data['total_address_violations']:,}"
+    })
+threshold_df = pd.DataFrame(threshold_data)
+Markdown(threshold_df.to_markdown(index=False))
+```
+
+### Distribution by Ward
+
+```{python}
+#| label: ward-summary
+ward_data = []
+for ward, data in sorted(placement["by_ward"].items()):
+    ward_data.append({
+        "Ward": ward,
+        "Blocks": data["blocks"],
+        "Containers": data["containers"],
+        "Addresses": f"{data['addresses']:,}"
+    })
+ward_df = pd.DataFrame(ward_data)
+Markdown(ward_df.to_markdown(index=False))
+```
+
+## 3. Capacity Analysis
+
+### Assumptions
+
+```{python}
+#| label: capacity-assumptions
+current = capacity["assumptions"]["current_system"]
+shared = capacity["assumptions"]["shared_system"]
+pop = capacity["assumptions"]["population"]
+
+assumptions_df = pd.DataFrame([
+    {"Category": "Current System", "Parameter": "Trash can size", "Value": f"{current['trash_can_size_gal']} gallons"},
+    {"Category": "Current System", "Parameter": "Pickups per week", "Value": f"{current['trash_pickups_per_week']:.0f}x"},
+    {"Category": "Current System", "Parameter": "Average utilization", "Value": f"{current['average_can_utilization']*100:.0f}%"},
+    {"Category": "Shared System", "Parameter": "Container size", "Value": f"{shared['container_size_gal']} gallons"},
+    {"Category": "Shared System", "Parameter": "Waste streams", "Value": f"{shared['n_waste_streams']} (trash, recycling, compost)"},
+    {"Category": "Shared System", "Parameter": "Average utilization", "Value": f"{shared['average_utilization']*100:.0f}%"},
+    {"Category": "Population", "Parameter": "Total households", "Value": f"{pop['total_households']:,}"},
+    {"Category": "Population", "Parameter": "Waste per person", "Value": f"{pop['waste_per_person_gal_week']} gal/week"},
+])
+Markdown(assumptions_df.to_markdown(index=False))
+```
+
+### Capacity Comparison
+
+```{python}
+#| label: capacity-comparison
+capacity_comparison = pd.read_csv(data_dir / "capacity_comparison.csv")
+Markdown(capacity_comparison.to_markdown(index=False))
+```
+
+### Minimum Pickup Frequency
+
+- **Current demand**: `{python} capacity["minimum_frequencies"]["baseline"]`x per week
+- **With +25% growth**: `{python} capacity["minimum_frequencies"]["with_25pct_growth"]`x per week
+
+## 4. Cost Analysis
+
+### Capital Costs
+
+```{python}
+#| label: capital-costs
+cap = cost["capital_costs"]
+capital_df = pd.DataFrame([
+    {"Category": "Containers", "Item": f"Purchase ({cap['containers']['n_containers']:,} units)", "Cost": f"${cap['containers']['purchase_cost']:,.0f}"},
+    {"Category": "Containers", "Item": "Installation", "Cost": f"${cap['containers']['installation_cost']:,.0f}"},
+    {"Category": "Trucks", "Item": f"Fleet ({cap['trucks']['n_trucks_needed']} trucks)", "Cost": f"${cap['trucks']['purchase_cost']:,.0f}"},
+    {"Category": "Transition", "Item": "Old bin collection", "Cost": f"${cap['transition']['bin_collection_cost']:,.0f}"},
+    {"Category": "Transition", "Item": "Bin recycling credit", "Cost": f"${cap['transition']['bin_disposal_credit']:,.0f}"},
+    {"Category": "Transition", "Item": "Public outreach", "Cost": f"${cap['transition']['outreach_campaign']:,.0f}"},
+    {"Category": "Transition", "Item": "Signage", "Cost": f"${cap['transition']['signage']:,.0f}"},
+    {"Category": "TOTAL", "Item": "", "Cost": f"${cap['total_capital_cost']:,.0f}"},
+])
+Markdown(capital_df.to_markdown(index=False))
+```
+
+**Capital cost per household: $`{python} f"{cap['capital_cost_per_household']:,.0f}"`**
+
+### Annual Operating Costs
+
+```{python}
+#| label: operating-costs
+ops = cost["annual_operating_costs"]
+operating_df = pd.DataFrame([
+    {"Category": "Container maintenance", "Cost": f"${ops['container_maintenance']:,.0f}"},
+    {"Category": "Truck fuel", "Cost": f"${ops['truck_operations']['fuel']:,.0f}"},
+    {"Category": "Truck maintenance", "Cost": f"${ops['truck_operations']['maintenance']:,.0f}"},
+    {"Category": "Truck insurance", "Cost": f"${ops['truck_operations']['insurance']:,.0f}"},
+    {"Category": "Labor", "Cost": f"${ops['labor']['annual_total']:,.0f}"},
+    {"Category": "TOTAL", "Cost": f"${ops['total_annual_operating']:,.0f}"},
+])
+Markdown(operating_df.to_markdown(index=False))
+```
+
+### Cost Comparison Summary
+
+```{python}
+#| label: cost-comparison
+cost_comparison = pd.read_csv(data_dir / "cost_comparison.csv")
+Markdown(cost_comparison.to_markdown(index=False))
+```
+
+## 5. Parking Impact
+
+```{python}
+#| label: parking-impact
+parking = cost["parking_impact"]
+parking_df = pd.DataFrame([
+    {"Metric": "Container locations", "Value": f"{parking['n_container_locations']:,}"},
+    {"Metric": "Total footprint", "Value": f"{parking['total_footprint_sqft']:,.0f} sq ft"},
+    {"Metric": "Parking spaces equivalent", "Value": f"{parking['parking_spaces_equivalent']:,.0f}"},
+    {"Metric": "Spaces in metered areas", "Value": f"{parking['spaces_in_metered_areas']:,.0f}"},
+    {"Metric": "% of DC metered parking", "Value": f"{parking['pct_of_dc_street_parking']:.1f}%"},
+    {"Metric": "Annual parking revenue impact", "Value": f"${parking['annual_parking_revenue_impact']:,.0f}"},
+])
+Markdown(parking_df.to_markdown(index=False))
+```
+
+## 6. Key Findings
+
+### Benefits
+
+1. **Significant cost savings**: Annual operating savings of $`{python} f"{(cost['current_system_costs']['annual_costs']['total'] - cost['annual_operating_costs']['total_annual_operating'])/1e6:.1f}"`M
+2. **Rapid payback**: Capital investment recovered in `{python} f"{cost['capital_costs']['total_capital_cost'] / (cost['current_system_costs']['annual_costs']['total'] - cost['annual_operating_costs']['total_annual_operating']):.1f}"` years
+3. **Scalable capacity**: Can handle +25% population growth by increasing pickup frequency to 4x/week
+4. **Labor efficiency**: Reduces collection workforce from ~300 to ~71 positions (76% reduction)
+5. **Cleaner streets**: Eliminates scattered individual cans
+
+### Challenges
+
+1. **Walking distance**: Some blocks exceed distance thresholds due to geography
+2. **Parking impact**: ~`{python} f"{parking['parking_spaces_equivalent']:,.0f}"` parking spaces consumed
+3. **Behavioral change**: Requires resident education and adjustment
+4. **Upfront investment**: $`{python} f"{cost['capital_costs']['total_capital_cost']/1e6:.0f}"`M capital required
+
+## 7. Recommendations
+
+1. **Pilot program**: Start with 2-3 wards to test resident acceptance
+2. **Phased rollout**: Deploy over 3-5 years to spread capital costs
+3. **Address outliers**: Consider alternative solutions for blocks exceeding 750 ft threshold
+4. **Monitor capacity**: Begin with 3x/week pickup, adjust based on actual utilization
+
+## Appendix: Data Sources
+
+- **Address data**: DC Open Data Portal (MAR Address Points)
+- **Block definitions**: Derived from address BLOCKKEY field
+- **Cost estimates**: Industry benchmarks, DC DPW budget documents
+- **Barcelona reference**: Academic literature on shared container systems
+
+---
+
+*Report generated from Project IRONCURB analysis pipeline. All assumptions are documented in the analysis code and can be adjusted for sensitivity analysis.*

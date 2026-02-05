@@ -1,0 +1,125 @@
+{
+  "inputs": {
+    "n_containers": 18247,
+    "n_households": 320000,
+    "pickup_frequency": 3
+  },
+  "assumptions": {
+    "container": {
+      "container_unit_cost": 2500,
+      "container_installation_cost": 1500,
+      "container_footprint_sqft": 25,
+      "container_lifespan_years": 15,
+      "container_annual_maintenance": 150,
+      "source": "Industry estimates for underground/semi-underground waste containers"
+    },
+    "truck": {
+      "truck_unit_cost": 350000,
+      "truck_lifespan_years": 10,
+      "containers_per_truck_per_day": 150,
+      "collection_days_per_week": 6,
+      "annual_fuel_cost": 25000,
+      "annual_maintenance_cost": 15000,
+      "annual_insurance_cost": 8000,
+      "source": "Industry estimates for automated side-loader trucks"
+    },
+    "labor": {
+      "current_crew_size": 3,
+      "current_hourly_wage_driver": 28,
+      "current_hourly_wage_collector": 22,
+      "current_hours_per_shift": 8,
+      "current_shifts_per_week": 10,
+      "shared_crew_size": 1,
+      "shared_hourly_wage_driver": 30,
+      "shared_hours_per_shift": 8,
+      "benefits_multiplier": 1.35,
+      "source": "DC DPW wage estimates, BLS data"
+    },
+    "current_system": {
+      "trash_can_cost": 65,
+      "recycling_can_cost": 50,
+      "can_lifespan_years": 10,
+      "truck_cost": 280000,
+      "trucks_in_fleet": 100,
+      "annual_collection_budget": 45000000,
+      "source": "DC DPW budget documents, industry estimates"
+    },
+    "transition": {
+      "bin_collection_cost_per_unit": 15,
+      "bin_disposal_recycling_value": -5,
+      "outreach_campaign_cost": 2000000,
+      "signage_per_container": 100,
+      "source": "Comparable city transition programs"
+    },
+    "parking": {
+      "parking_space_length_ft": 20,
+      "parking_space_width_ft": 8,
+      "parking_space_sqft": 160,
+      "containers_per_location": 3,
+      "location_footprint_sqft": 100,
+      "annual_parking_revenue_per_space": 2500,
+      "pct_locations_in_metered_areas": 0.15,
+      "source": "DC DDOT parking standards"
+    }
+  },
+  "capital_costs": {
+    "containers": {
+      "n_containers": 18247,
+      "purchase_cost": 45617500,
+      "installation_cost": 27370500,
+      "total": 72988000
+    },
+    "trucks": {
+      "n_trucks_needed": 71,
+      "purchase_cost": 24850000
+    },
+    "transition": {
+      "old_bins_to_collect": 640000,
+      "bin_collection_cost": 9600000,
+      "bin_disposal_credit": -3200000,
+      "outreach_campaign": 2000000,
+      "signage": 608233.3333333333,
+      "total": 9008233.333333334
+    },
+    "total_capital_cost": 106846233.33333333,
+    "capital_cost_per_household": 333.89447916666666
+  },
+  "annual_operating_costs": {
+    "container_maintenance": 2737050,
+    "truck_operations": {
+      "fuel": 1775000,
+      "maintenance": 1065000,
+      "insurance": 568000,
+      "total": 3408000
+    },
+    "labor": {
+      "shifts_per_week": 426,
+      "hourly_cost_with_benefits": 40.5,
+      "annual_total": 7177248.0
+    },
+    "total_annual_operating": 13322298.0,
+    "operating_cost_per_household": 41.63218125
+  },
+  "current_system_costs": {
+    "capital_invested": {
+      "cans": 36800000.0,
+      "trucks": 28000000,
+      "total": 64800000.0
+    },
+    "annual_costs": {
+      "operating_budget": 45000000,
+      "annualized_can_replacement": 3680000.0,
+      "annualized_truck_replacement": 2800000.0,
+      "total": 51480000.0
+    },
+    "cost_per_household": 160.875
+  },
+  "parking_impact": {
+    "n_container_locations": 6082,
+    "total_footprint_sqft": 608233.3333333333,
+    "parking_spaces_equivalent": 3801.458333333333,
+    "spaces_in_metered_areas": 570.2187499999999,
+    "annual_parking_revenue_impact": 1425546.8749999998,
+    "pct_of_dc_street_parking": 22.361519607843135
+  }
+}
