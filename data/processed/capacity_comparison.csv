@@ -1,0 +1,6 @@
+System,Pickup Frequency,Trash Capacity (M gal/week),Trash Demand (M gal/week),Headroom (%),Meets Demand
+Current (Individual Cans),2x/week,46.08,5.376,757.1428571428571,Yes
+Shared Containers,2x/week,3.892693333333333,5.376,-27.591269841269845,No
+Shared Containers,3x/week,5.83904,5.376,8.613095238095237,Yes
+Shared Containers,5x/week,9.731733333333333,5.376,81.02182539682538,Yes
+Shared Containers,7x/week,13.624426666666666,5.376,153.43055555555554,Yes

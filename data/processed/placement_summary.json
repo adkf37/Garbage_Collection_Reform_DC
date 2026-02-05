@@ -1,0 +1,98 @@
+{
+  "overall": {
+    "total_blocks": 11606,
+    "active_blocks": 7976,
+    "skipped_blocks": 3630,
+    "total_containers": "18247",
+    "total_addresses_covered": "135154",
+    "avg_containers_per_block": 2.287738214643932,
+    "avg_max_distance_ft": 118.60428472359102,
+    "max_max_distance_ft": 2545.538175662444
+  },
+  "by_ward": {
+    "Ward 8": {
+      "blocks": 861,
+      "containers": 1940,
+      "addresses": 14744,
+      "compliant_250ft": 1,
+      "compliant_500ft": 1,
+      "compliant_750ft": 1
+    },
+    "Ward 5": {
+      "blocks": 1238,
+      "containers": 2859,
+      "addresses": 22229,
+      "compliant_250ft": 1,
+      "compliant_500ft": 1,
+      "compliant_750ft": 1
+    },
+    "Ward 4": {
+      "blocks": 1383,
+      "containers": 3133,
+      "addresses": 21580,
+      "compliant_250ft": 1,
+      "compliant_500ft": 1,
+      "compliant_750ft": 1
+    },
+    "Ward 3": {
+      "blocks": 1156,
+      "containers": 2511,
+      "addresses": 15369,
+      "compliant_250ft": 1,
+      "compliant_500ft": 1,
+      "compliant_750ft": 1
+    },
+    "Ward 2": {
+      "blocks": 771,
+      "containers": 1741,
+      "addresses": 12017,
+      "compliant_250ft": 1,
+      "compliant_500ft": 1,
+      "compliant_750ft": 1
+    },
+    "Ward 7": {
+      "blocks": 1252,
+      "containers": 2868,
+      "addresses": 21557,
+      "compliant_250ft": 1,
+      "compliant_500ft": 1,
+      "compliant_750ft": 1
+    },
+    "Ward 6": {
+      "blocks": 793,
+      "containers": 1933,
+      "addresses": 16529,
+      "compliant_250ft": 1,
+      "compliant_500ft": 1,
+      "compliant_750ft": 1
+    },
+    "Ward 1": {
+      "blocks": 522,
+      "containers": 1262,
+      "addresses": 11129,
+      "compliant_250ft": 1,
+      "compliant_500ft": 1,
+      "compliant_750ft": 1
+    }
+  },
+  "by_threshold": {
+    "250ft": {
+      "compliant_blocks": 1,
+      "non_compliant_blocks": 7975,
+      "compliance_rate": 0.00012537612838515547,
+      "total_address_violations": 1028
+    },
+    "500ft": {
+      "compliant_blocks": 1,
+      "non_compliant_blocks": 7975,
+      "compliance_rate": 0.00012537612838515547,
+      "total_address_violations": 137
+    },
+    "750ft": {
+      "compliant_blocks": 1,
+      "non_compliant_blocks": 7975,
+      "compliance_rate": 0.00012537612838515547,
+      "total_address_violations": 45
+    }
+  }
+}

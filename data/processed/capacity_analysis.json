@@ -1,0 +1,164 @@
+{
+  "assumptions": {
+    "current_system": {
+      "trash_can_size_gal": 96,
+      "recycling_can_size_gal": 65,
+      "trash_cans_per_household": 1.0,
+      "recycling_cans_per_household": 1.0,
+      "trash_pickups_per_week": 2.0,
+      "recycling_pickups_per_week": 1.0,
+      "average_can_utilization": 0.75,
+      "source": "DC DPW standard residential service"
+    },
+    "shared_system": {
+      "container_size_gal": 400,
+      "n_waste_streams": 3,
+      "collection_frequencies": [
+        2,
+        3,
+        5,
+        7
+      ],
+      "average_utilization": 0.8,
+      "source": "Barcelona-style shared container system"
+    },
+    "population": {
+      "total_households": 320000,
+      "persons_per_household": 2.1,
+      "growth_rate": 0.25,
+      "waste_per_person_gal_week": 8.0,
+      "recycling_per_person_gal_week": 4.0,
+      "source": "DC Census estimates, EPA waste generation data"
+    }
+  },
+  "n_containers": 18247,
+  "current_system_capacity": {
+    "system": "current_individual_cans",
+    "trash_capacity_per_household_weekly_gal": 192.0,
+    "recycling_capacity_per_household_weekly_gal": 65.0,
+    "total_trash_capacity_weekly_gal": 61440000.0,
+    "total_recycling_capacity_weekly_gal": 20800000.0,
+    "effective_trash_capacity_weekly_gal": 46080000.0,
+    "effective_recycling_capacity_weekly_gal": 15600000.0,
+    "weekly_trash_demand_gal": 5376000.0,
+    "weekly_recycling_demand_gal": 2688000.0,
+    "trash_capacity_headroom_pct": 757.1428571428571,
+    "recycling_capacity_headroom_pct": 480.3571428571429
+  },
+  "shared_system_by_frequency": {
+    "2x_week": {
+      "system": "shared_containers_2x_week",
+      "n_containers_total": 18247,
+      "n_containers_per_stream": 6082,
+      "container_size_gal": 400,
+      "pickup_frequency_per_week": 2,
+      "total_capacity_per_stream_weekly_gal": 4865866.666666666,
+      "effective_capacity_per_stream_weekly_gal": 3892693.333333333,
+      "capacity_per_household_weekly_gal": 15.20583333333333,
+      "weekly_trash_demand_gal": 5376000.0,
+      "weekly_recycling_demand_gal": 2688000.0,
+      "trash_capacity_headroom_pct": -27.591269841269845,
+      "recycling_capacity_headroom_pct": 44.81746031746031,
+      "meets_trash_demand": false,
+      "meets_recycling_demand": true
+    },
+    "3x_week": {
+      "system": "shared_containers_3x_week",
+      "n_containers_total": 18247,
+      "n_containers_per_stream": 6082,
+      "container_size_gal": 400,
+      "pickup_frequency_per_week": 3,
+      "total_capacity_per_stream_weekly_gal": 7298799.999999999,
+      "effective_capacity_per_stream_weekly_gal": 5839040.0,
+      "capacity_per_household_weekly_gal": 22.808749999999996,
+      "weekly_trash_demand_gal": 5376000.0,
+      "weekly_recycling_demand_gal": 2688000.0,
+      "trash_capacity_headroom_pct": 8.613095238095237,
+      "recycling_capacity_headroom_pct": 117.22619047619047,
+      "meets_trash_demand": true,
+      "meets_recycling_demand": true
+    },
+    "5x_week": {
+      "system": "shared_containers_5x_week",
+      "n_containers_total": 18247,
+      "n_containers_per_stream": 6082,
+      "container_size_gal": 400,
+      "pickup_frequency_per_week": 5,
+      "total_capacity_per_stream_weekly_gal": 12164666.666666664,
+      "effective_capacity_per_stream_weekly_gal": 9731733.333333332,
+      "capacity_per_household_weekly_gal": 38.01458333333333,
+      "weekly_trash_demand_gal": 5376000.0,
+      "weekly_recycling_demand_gal": 2688000.0,
+      "trash_capacity_headroom_pct": 81.02182539682538,
+      "recycling_capacity_headroom_pct": 262.0436507936507,
+      "meets_trash_demand": true,
+      "meets_recycling_demand": true
+    },
+    "7x_week": {
+      "system": "shared_containers_7x_week",
+      "n_containers_total": 18247,
+      "n_containers_per_stream": 6082,
+      "container_size_gal": 400,
+      "pickup_frequency_per_week": 7,
+      "total_capacity_per_stream_weekly_gal": 17030533.333333332,
+      "effective_capacity_per_stream_weekly_gal": 13624426.666666666,
+      "capacity_per_household_weekly_gal": 53.220416666666665,
+      "weekly_trash_demand_gal": 5376000.0,
+      "weekly_recycling_demand_gal": 2688000.0,
+      "trash_capacity_headroom_pct": 153.43055555555554,
+      "recycling_capacity_headroom_pct": 406.86111111111114,
+      "meets_trash_demand": true,
+      "meets_recycling_demand": true
+    }
+  },
+  "stress_tests": {
+    "2x_week": {
+      "scenario": "+25% population growth",
+      "baseline_households": 320000,
+      "growth_households": 400000,
+      "pickup_frequency": 2,
+      "baseline_trash_headroom_pct": -27.591269841269845,
+      "growth_trash_headroom_pct": -42.073015873015876,
+      "baseline_meets_demand": false,
+      "growth_meets_demand": false,
+      "additional_pickups_needed": true
+    },
+    "3x_week": {
+      "scenario": "+25% population growth",
+      "baseline_households": 320000,
+      "growth_households": 400000,
+      "pickup_frequency": 3,
+      "baseline_trash_headroom_pct": 8.613095238095237,
+      "growth_trash_headroom_pct": -13.10952380952381,
+      "baseline_meets_demand": true,
+      "growth_meets_demand": false,
+      "additional_pickups_needed": true
+    },
+    "5x_week": {
+      "scenario": "+25% population growth",
+      "baseline_households": 320000,
+      "growth_households": 400000,
+      "pickup_frequency": 5,
+      "baseline_trash_headroom_pct": 81.02182539682538,
+      "growth_trash_headroom_pct": 44.8174603174603,
+      "baseline_meets_demand": true,
+      "growth_meets_demand": true,
+      "additional_pickups_needed": false
+    },
+    "7x_week": {
+      "scenario": "+25% population growth",
+      "baseline_households": 320000,
+      "growth_households": 400000,
+      "pickup_frequency": 7,
+      "baseline_trash_headroom_pct": 153.43055555555554,
+      "growth_trash_headroom_pct": 102.74444444444444,
+      "baseline_meets_demand": true,
+      "growth_meets_demand": true,
+      "additional_pickups_needed": false
+    }
+  },
+  "minimum_frequencies": {
+    "baseline": 3,
+    "with_25pct_growth": 4
+  }
+}
