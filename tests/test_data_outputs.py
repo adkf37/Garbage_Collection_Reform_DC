@@ -282,8 +282,9 @@ class TestAppAndReport:
         assert (PROJECT_ROOT / "report" / "ironcurb.qmd").exists()
 
     def test_app_py_importable_structure(self):
-        """Check that app.py has expected function names (without importing streamlit)."""
+        """Check that app.py has expected public functions and a spatial lookup capability."""
         source = (PROJECT_ROOT / "app" / "app.py").read_text()
-        assert "def main(" in source
-        assert "load_container_data" in source
-        assert "cKDTree" in source
+        assert "def main(" in source, "app.py must define a main() function"
+        assert "load_container_data" in source, "app.py must define load_container_data()"
+        assert "find_nearest_container" in source, "app.py must define find_nearest_container()"
+        assert "DISTANCE_THRESHOLDS" in source, "app.py must define DISTANCE_THRESHOLDS constant"
