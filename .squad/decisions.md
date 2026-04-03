@@ -66,6 +66,28 @@
 
 **Applies to:** `.squad/team.md`, `.squad/routing.md`
 
+---
+
+### 2026-04-03 — Tester Phase: Performance Optimisation in container_placement.py
+
+**Decision:** Two targeted changes to `analysis/container_placement.py` to meet the <60s runtime criterion:
+
+1. **Replace per-block boolean filter with `groupby`** — the original code called
+   `addresses[addresses["BLOCKKEY"] == block_id]` inside a loop over 11,606 blocks,
+   producing quadratic O(n × n_blocks) scan cost. Replaced with a single
+   `addresses.groupby("BLOCKKEY")` before the loop.
+2. **Reduce `KMeans(n_init=10)` → `n_init=3`** — k-means++ initialization converges
+   reliably in fewer restarts; `random_state=42` preserves determinism.
+
+**Measured impact:** runtime reduced from ~2m40s → ~42s (under the 60s acceptance criterion).
+
+**Edge cases documented:**
+- Blocks with fewer than `MIN_ADDRESSES_FOR_CONTAINERS` (5) are skipped — recorded in `block_stats.parquet` with `skipped=True`.
+- Missing data files raise informative `st.error()` messages in the app rather than crashing.
+- API failures during `src/fetch_dc_data.py` are surfaced as exceptions with full tracebacks.
+
+**Applies to:** `analysis/container_placement.py`, `tests/test_data_outputs.py`
+
 ## Governance
 
 - All meaningful architectural changes require Lead approval
