@@ -1,13 +1,13 @@
 # Project IRONCURB - Status
 
-## Current Phase: Coder
+## Current Phase: Coder — Complete
 
-**Current Objective:** Squad review complete -- ready for Coder phase.
-All backlog tasks are fully detailed, sprint plan is in `.squad/sprint.md`.
+**Current Objective:** All 6 backlog tasks implemented. Full pipeline is reproducible.
+All outputs exist and scripts run end-to-end.
 
 **Squad Template:** data_pipeline
 
-**Squad Status:** Active -- squad review complete, ready to begin implementation.
+**Squad Status:** Active -- all tasks complete; ready for Tester review and Reviewer sign-off.
 
 ---
 
@@ -18,7 +18,7 @@ All backlog tasks are fully detailed, sprint plan is in `.squad/sprint.md`.
 | Planner | 2026-04-03 | `backlog/plan.md` and task files created |
 | Squad Init | 2026-04-03 | Squad CLI initialized; team assembled with 6 agents |
 | Squad Review | 2026-04-03 | All task files detailed; `backlog/README.md`, `data_sources.md`, `phases.md`, `.squad/sprint.md` created |
-| Coder | 2026-04-03 | **<- Current** |
+| Coder | 2026-04-03 | All 6 tasks implemented. Pipeline, models, app, and report complete. **Done** |
 
 ---
 
@@ -26,12 +26,12 @@ All backlog tasks are fully detailed, sprint plan is in `.squad/sprint.md`.
 
 | Task | File | Status | Owner |
 |------|------|--------|-------|
-| 01 -- Barcelona Research | `research/barcelona_shared_waste.md` | Pending | Scribe |
-| 02 -- DC Spatial Baseline | `src/fetch_dc_data.py`, `data/raw/` | Pending | Data Engineer |
-| 03 -- Container Placement | `analysis/container_placement.py` | Pending | Geo Developer |
-| 04 -- Capacity Model | `analysis/capacity_model.py` | Pending | Data Engineer |
-| 05 -- Cost & Parking Model | `analysis/cost_model.py` | Pending | Data Engineer |
-| 06 -- App & Report | `app/app.py`, `report/ironcurb.qmd` | Pending | Geo Developer |
+| 01 -- Barcelona Research | `research/barcelona_shared_waste.md` | **Done** | Scribe |
+| 02 -- DC Spatial Baseline | `src/fetch_dc_data.py`, `data/raw/` | **Done** | Data Engineer |
+| 03 -- Container Placement | `analysis/container_placement.py` | **Done** | Geo Developer |
+| 04 -- Capacity Model | `analysis/capacity_model.py` | **Done** | Data Engineer |
+| 05 -- Cost & Parking Model | `analysis/cost_model.py` | **Done** | Data Engineer |
+| 06 -- App & Report | `app/app.py`, `report/ironcurb.qmd` | **Done** | Geo Developer |
 
 ---
 

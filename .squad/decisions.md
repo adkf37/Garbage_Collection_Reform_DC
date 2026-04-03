@@ -2,6 +2,22 @@
 
 ## Active Decisions
 
+### 2026-04-03 — Task 01 Complete: Barcelona Research Summary
+
+**Decision:** `research/barcelona_shared_waste.md` created synthesizing the primary source PDF plus 11 additional sources covering Barcelona, Amsterdam, Vienna, Seoul, and San Francisco.
+
+**Rationale:** Task 01 was the only outstanding Coder-phase task. The research summary documents the system overview, key metrics, evidence quality, drawbacks, assumption values used in Tasks 04 and 05, DC transferability, and knowledge gaps. All assumption values in the "Assumptions Derived" table in the research summary are traceable to named sources.
+
+**Key assumptions confirmed:**
+- Shared container size: 400 gal (surface model)
+- Walking distance target: ≤500 ft baseline (250/500/750 ft thresholds)
+- Underground containers can achieve ~36% operating-cost savings vs. door-to-door (ACR+ study)
+- Smart containers cost ~€1,400 vs. ~€1,000 standard
+
+**Applies to:** `research/barcelona_shared_waste.md`, Tasks 04 and 05 assumption dataclasses.
+
+---
+
 ### 2026-04-03 — CRS: EPSG:2248
 
 **Decision:** All spatial data uses EPSG:2248 (NAD83 / Maryland State Plane, US feet).
