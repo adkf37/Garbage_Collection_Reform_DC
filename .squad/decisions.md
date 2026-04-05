@@ -1,6 +1,32 @@
 # Squad Decisions
 
-## Active Decisions
+### 2026-04-05 — Reviewer Phase: Report Section Gaps Fixed
+
+**Decision:** Three sections required by `backlog/tasks/06_app_and_report.md` were absent from `report/ironcurb.qmd`:
+
+1. **Barcelona System Overview** — added as new section 2, summarising the key metrics
+   from `research/barcelona_shared_waste.md` (walking distance target, cost savings,
+   comparable city outcomes) and making the research-to-model traceability visible.
+2. **Methodology** — added as new section 3, documenting the container placement
+   algorithm steps (groupby → k-means → distance thresholds → ward aggregation) so
+   the report is self-contained for a non-technical audience.
+3. **Limitations & Assumptions** — added as new section 9, listing the key modelling
+   assumptions in a table with sources and noting scope limitations (cluster-centroid
+   approximation, order-of-magnitude cost estimates, uniform growth distribution,
+   participation rates, 2024 address snapshot).
+
+A dedicated **Conclusion** section (section 10) was also added, distinct from the
+existing Recommendations (section 11), to give a clear go/no-go summary referencing
+live compliance and payback metrics from the data.
+
+**Test added:** `TestAppAndReport::test_report_required_sections` — verifies all
+required section keywords are present in the QMD file.  Test count: 40 → 41.
+
+**Applies to:** `report/ironcurb.qmd`, `tests/test_data_outputs.py`
+
+---
+
+
 
 ### 2026-04-03 — Task 01 Complete: Barcelona Research Summary
 

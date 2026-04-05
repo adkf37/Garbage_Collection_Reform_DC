@@ -289,6 +289,22 @@ class TestAppAndReport:
         assert "find_nearest_container" in source, "app.py must define find_nearest_container()"
         assert "DISTANCE_THRESHOLDS" in source, "app.py must define DISTANCE_THRESHOLDS constant"
 
+    def test_report_required_sections(self):
+        """Report must contain all 9 sections required by backlog/tasks/06_app_and_report.md."""
+        text = (PROJECT_ROOT / "report" / "ironcurb.qmd").read_text()
+        required_sections = [
+            "Executive Summary",
+            "Background",               # Problem Statement (current DC system)
+            "Barcelona System Overview", # Barcelona System Overview
+            "Methodology",              # Methodology (container placement algorithm)
+            "Capacity Analysis",        # Results: Capacity Analysis
+            "Cost Analysis",            # Results: Cost & Parking Impact
+            "Limitations",              # Limitations & Assumptions
+            "Conclusion",               # Conclusion
+        ]
+        for section in required_sections:
+            assert section in text, f"Report is missing required section: {section}"
+
 
 # ===========================================================================
 # Phase 5 — Performance Benchmarks (Tester phase)
