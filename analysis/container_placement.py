@@ -111,8 +111,8 @@ def place_containers_on_block(
     # Can't have more clusters than points
     n_containers = min(n_containers, n_addresses)
     
-    # Run k-means clustering
-    kmeans = KMeans(n_clusters=n_containers, random_state=42, n_init=10)
+    # Run k-means clustering (n_init=3 balances speed with convergence; random_state=42 ensures determinism)
+    kmeans = KMeans(n_clusters=n_containers, random_state=42, n_init=3)
     kmeans.fit(coords)
     
     # Get container locations (cluster centers)
@@ -169,20 +169,20 @@ def run_placement_algorithm(
     if "BLOCKKEY" not in addresses.columns:
         raise ValueError("Address data must have BLOCKKEY column")
     
-    # Get unique blocks
-    blocks = addresses["BLOCKKEY"].dropna().unique()
-    print(f"Processing {len(blocks)} blocks...")
-    
+    # Group addresses by block once (avoids O(n) per-block filter)
+    grouped = addresses.dropna(subset=["BLOCKKEY"]).groupby("BLOCKKEY")
+    n_blocks = len(grouped)
+    print(f"Processing {n_blocks} blocks...")
+
     all_containers = []
     all_stats = []
-    
-    for i, block_id in enumerate(blocks):
+
+    for i, (block_id, block_addresses) in enumerate(grouped):
         if i % 500 == 0:
-            print(f"  Processing block {i}/{len(blocks)}...")
-        
-        block_addresses = addresses[addresses["BLOCKKEY"] == block_id]
+            print(f"  Processing block {i}/{n_blocks}...")
+
         containers, stats = place_containers_on_block(block_addresses, block_id)
-        
+
         if containers is not None:
             all_containers.append(containers)
         all_stats.append(stats)

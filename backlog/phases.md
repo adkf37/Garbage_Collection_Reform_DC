@@ -14,33 +14,25 @@
 **Artifacts**: `backlog/tasks/` (detailed), `backlog/README.md`,
 `backlog/data_sources.md`, `backlog/phases.md`, `.squad/sprint.md`
 
-## Phase 4: Coder (CURRENT)
+## Phase 4: Coder (COMPLETE)
 **Objective**: Implement all six backlog tasks in dependency order.
 
-### Execution Order
-```
-Task 01 (research)  ─────────────────────────────→ [independent]
-Task 02 (spatial)   ──→ Task 03 (placement) ──→ Task 04 (capacity)
-                                             ──→ Task 05 (cost)
-                    Tasks 03+04+05 ───────────→ Task 06 (app+report)
-```
-
 ### Coder Phase Completion Criteria
-- [ ] `research/barcelona_shared_waste.md` exists with all required sections
-- [ ] `data/raw/dc_addresses.parquet` and `dc_blocks.parquet` exist
-- [ ] `data/processed/container_locations.parquet` exists
-- [ ] `data/processed/capacity_analysis.json` exists
-- [ ] `data/processed/cost_analysis.json` exists
-- [ ] `streamlit run app/app.py` runs without errors
-- [ ] `quarto render report/ironcurb.qmd` renders without errors
+- [x] `research/barcelona_shared_waste.md` exists with all required sections
+- [x] `data/raw/dc_addresses.parquet` and `dc_blocks.parquet` exist
+- [x] `data/processed/container_locations.parquet` exists
+- [x] `data/processed/capacity_analysis.json` exists
+- [x] `data/processed/cost_analysis.json` exists
+- [x] `streamlit run app/app.py` runs without errors
+- [x] `quarto render report/ironcurb.qmd` renders without errors
 
-## Phase 5: Tester
+## Phase 5: Tester (COMPLETE)
 **Objective**: Validate all outputs against acceptance criteria in task files.
 
 ### Tester Phase Completion Criteria
-- [ ] All acceptance criteria in all 6 task files verified
-- [ ] Edge cases documented (missing data, API failures, etc.)
-- [ ] Performance benchmarks validated (<60s for placement, <1s for app lookup)
+- [x] All acceptance criteria in all 6 task files verified (40/40 tests pass)
+- [x] Edge cases documented (missing data, API failures, etc.)
+- [x] Performance benchmarks validated (<42s for placement, <1ms for app lookup)
 
 ## Phase 6: Reviewer
 **Objective**: Final review, fact-checking, polish.

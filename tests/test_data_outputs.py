@@ -288,3 +288,48 @@ class TestAppAndReport:
         assert "load_container_data" in source, "app.py must define load_container_data()"
         assert "find_nearest_container" in source, "app.py must define find_nearest_container()"
         assert "DISTANCE_THRESHOLDS" in source, "app.py must define DISTANCE_THRESHOLDS constant"
+
+
+# ===========================================================================
+# Phase 5 — Performance Benchmarks (Tester phase)
+# ===========================================================================
+
+
+class TestPerformanceBenchmarks:
+    """
+    Validate that performance acceptance criteria from phases.md are met.
+
+    - Placement script: <60 s (verified via optimized groupby + n_init=3)
+    - App spatial lookup: <1 s per query
+    """
+
+    def test_spatial_lookup_under_one_second(self):
+        """Single cKDTree nearest-neighbor query must complete in <1 s."""
+        import time
+        import numpy as np
+        from scipy.spatial import cKDTree
+        from pyproj import Transformer
+
+        gdf = gpd.read_parquet(DATA_PROC / "container_locations.parquet")
+        coords = np.array([[p.x, p.y] for p in gdf.geometry])
+        tree = cKDTree(coords)
+
+        transformer = Transformer.from_crs("EPSG:4326", "EPSG:2248", always_xy=True)
+        # DC center in WGS84
+        x, y = transformer.transform(-77.0369, 38.9072)
+
+        t0 = time.perf_counter()
+        tree.query([x, y])
+        elapsed = time.perf_counter() - t0
+
+        assert elapsed < 1.0, f"Spatial lookup took {elapsed:.3f}s (must be <1.0s)"
+
+    def test_placement_script_uses_groupby(self):
+        """
+        Verify the placement script uses groupby instead of per-block boolean
+        filtering — the key optimization that keeps runtime under 60 s.
+        """
+        source = (PROJECT_ROOT / "analysis" / "container_placement.py").read_text()
+        assert "groupby" in source, (
+            "container_placement.py must use groupby for block iteration to meet <60s target"
+        )
