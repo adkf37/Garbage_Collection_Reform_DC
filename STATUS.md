@@ -1,13 +1,14 @@
 # Project IRONCURB - Status
 
-## Current Phase: Tester — Complete
+## Current Phase: Reviewer — Complete
 
-**Current Objective:** All 6 backlog tasks validated. Performance benchmarks met.
-40/40 tests pass. Pipeline is reproducible and runs within time constraints.
+**Current Objective:** All 9 backlog success criteria verified against live data outputs.
+All 6 tasks complete. 40/40 tests pass. Pipeline reproducible within time constraints.
+`backlog/README.md` success-criteria checkboxes updated to `[x]`. Project is complete.
 
 **Squad Template:** data_pipeline
 
-**Squad Status:** Active -- Tester phase complete; ready for Reviewer sign-off.
+**Squad Status:** Active -- Reviewer phase complete; project sign-off granted.
 
 ---
 
@@ -20,6 +21,7 @@
 | Squad Review | 2026-04-03 | All task files detailed; `backlog/README.md`, `data_sources.md`, `phases.md`, `.squad/sprint.md` created |
 | Coder | 2026-04-03 | All 6 tasks implemented. Pipeline, models, app, and report complete. **Done** |
 | Tester | 2026-04-03 | 40/40 tests pass. Performance benchmarks met (<42s placement, <1ms lookup). **Done** |
+| Reviewer | 2026-04-05 | All 9 success criteria verified against live outputs. `backlog/README.md` checkboxes marked complete. **Done** |
 
 ---
 
