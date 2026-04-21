@@ -2,6 +2,34 @@
 
 ## Active Decisions
 
+### 2026-04-21 — Validate Phase (Re-run): 40/40 Tests Pass; Phase → Closeout
+
+**Decision:** Validation loop re-run triggered by `copilot/validate-garbage-collection-reform`
+branch. All 40 acceptance-criteria tests pass with no failures, no warnings, and no
+previously unknown blockers. Project phase confirmed as **Closeout**.
+
+**Validation run evidence:**
+
+| Check | Result | Details |
+|-------|--------|---------|
+| `pytest tests/test_data_outputs.py -v` | ✅ 40/40 passed | 2.23 s total; 0 failures |
+| TestBarcelonaResearch (5 tests) | ✅ All pass | Research file ≥1,000 words; all 8 required sections present; ≥3 sources; 400-gal value present |
+| TestDCSpatialBaseline (9 tests) | ✅ All pass | Parquet files load; EPSG:2248 CRS; BLOCKKEY present; null rate <1%; no invalid geometries |
+| TestContainerPlacement (8 tests) | ✅ All pass | container_locations.parquet valid; placement_summary.json has overall/by_threshold/by_ward keys; 250/500/750 ft thresholds present; block_stats.parquet exists |
+| TestCapacityModel (6 tests) | ✅ All pass | capacity_analysis.json has all required keys; capacity_comparison.csv readable; +25% growth scenario in stress_tests |
+| TestCostModel (6 tests) | ✅ All pass | cost_analysis.json has capital_costs/annual_operating_costs/parking_impact; cost_comparison.csv readable; capital cost > 0 |
+| TestAppAndReport (3 tests) | ✅ All pass | app.py and ironcurb.qmd exist; app.py defines main(), load_container_data(), find_nearest_container(), DISTANCE_THRESHOLDS |
+| TestPerformanceBenchmarks (2 tests) | ✅ All pass | cKDTree lookup <1 s; container_placement.py uses groupby |
+
+**Gaps / blockers found:** None.
+
+**Next recommended phase:** Closeout — no rework required.
+
+**Applies to:** `STATUS.md`
+
+---
+
+
 ### 2026-04-21 — Closeout: Project IRONCURB Complete
 
 **Decision:** Project IRONCURB has completed all phases and is ready for stakeholder
