@@ -4,7 +4,7 @@
 and written report for Project IRONCURB.
 
 **Created**: 2026-04-03
-**Phase**: Coder
+**Phase**: Complete
 
 ---
 
@@ -42,8 +42,8 @@ Tasks 01 and 02 are fully independent and can run in parallel.
 
 | # | Task | File | Agent | Status | Blocked? |
 |---|------|------|-------|--------|----------|
-| 01 | Barcelona Research | `tasks/01_research_barcelona.md` | Scribe | Pending | No |
-| 02 | DC Spatial Baseline | `tasks/02_dc_spatial_baseline.md` | Data Engineer | Pending | No |
+| 01 | Barcelona Research | `tasks/01_research_barcelona.md` | Scribe | **Done** | No |
+| 02 | DC Spatial Baseline | `tasks/02_dc_spatial_baseline.md` | Data Engineer | **Done** | No |
 
 **Wave 1 outputs needed before Wave 2:**
 - `research/barcelona_shared_waste.md` (from 01)
@@ -55,7 +55,7 @@ Tasks 01 and 02 are fully independent and can run in parallel.
 
 | # | Task | File | Agent | Status | Blocked? |
 |---|------|------|-------|--------|----------|
-| 03 | Container Placement | `tasks/03_container_placement.md` | Geo Developer | Pending | Needs Task 02 |
+| 03 | Container Placement | `tasks/03_container_placement.md` | Geo Developer | **Done** | No |
 
 **Wave 2 outputs needed before Wave 3:**
 - `data/processed/container_locations.parquet`
@@ -67,8 +67,8 @@ Tasks 01 and 02 are fully independent and can run in parallel.
 
 | # | Task | File | Agent | Status | Blocked? |
 |---|------|------|-------|--------|----------|
-| 04 | Capacity Model | `tasks/04_capacity_model.md` | Data Engineer | Pending | Needs Task 03 |
-| 05 | Cost & Parking | `tasks/05_cost_and_parking.md` | Data Engineer | Pending | Needs Task 03 |
+| 04 | Capacity Model | `tasks/04_capacity_model.md` | Data Engineer | **Done** | No |
+| 05 | Cost & Parking | `tasks/05_cost_and_parking.md` | Data Engineer | **Done** | No |
 
 **Wave 3 outputs needed before Wave 4:**
 - `data/processed/capacity_analysis.json`
@@ -80,7 +80,7 @@ Tasks 01 and 02 are fully independent and can run in parallel.
 
 | # | Task | File | Agent | Status | Blocked? |
 |---|------|------|-------|--------|----------|
-| 06 | App & Report | `tasks/06_app_and_report.md` | Geo Developer | Pending | Needs 03+04+05 |
+| 06 | App & Report | `tasks/06_app_and_report.md` | Geo Developer | **Done** | No |
 
 ---
 
