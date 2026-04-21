@@ -26,6 +26,7 @@ No blocking issues remain. Ready for stakeholder delivery.
 | Validate (re-run) | 2026-04-21 | 40/40 tests pass (2.23 s). No failures, no blockers. All 9 success criteria confirmed. Phase → **Closeout**. |
 | Closeout (final) | 2026-04-21 | Final review pass complete. All backlog tasks done, sprint DoD met, no blockers. Phase set to `Closeout (complete)`. **Done** |
 | Closeout (re-confirmed) | 2026-04-21 | Maestro closeout loop re-verified all criteria. No rework needed. 40/40 tests pass. No blockers. All handoff docs current. **Done** |
+| Validate (re-run #2) | 2026-04-21 | 40/40 tests pass (1.93 s). CI workflow (`ci.yml`) added. No failures, no gaps. Phase → **Closeout**. |
 
 ---
 
@@ -56,7 +57,7 @@ See `.squad/sprint.md` for the full execution plan.
 
 None — all 40 validation tests pass. Project is confirmed complete and ready for stakeholder delivery. See `RESULTS_SUMMARY.md` for handoff summary.
 
-**Validate-phase summary (2026-04-21):** `pytest tests/test_data_outputs.py -v` → 40 passed in 2.23 s. No failures or gaps detected. See `.squad/decisions.md` for full evidence table.
+**Validate-phase summary (2026-04-21, re-run #2):** `pytest tests/test_data_outputs.py -v` → 40 passed in 1.93 s. No failures or gaps detected. CI workflow (`.github/workflows/ci.yml`) added to enforce automated testing on PRs. See `.squad/decisions.md` for full evidence table.
 
 ---
 

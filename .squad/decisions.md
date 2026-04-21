@@ -2,7 +2,36 @@
 
 ## Active Decisions
 
-### 2026-04-21 — Closeout (re-confirmed): Maestro Closeout Loop Verification
+### 2026-04-21 — Validate Phase (Re-run #2): 40/40 Tests Pass; CI Workflow Added; Phase → Closeout
+
+**Decision:** Second validation loop run triggered by `copilot/validate-garbage-collection-reform-again`
+branch. All 40 acceptance-criteria tests pass with no failures in 1.93 s. Root cause of the
+`action_required` CI status in the previous branch was the absence of `.github/workflows/ci.yml`.
+The workflow has now been added so future PRs automatically run pytest.
+
+**Validation run evidence:**
+
+| Check | Result | Details |
+|-------|--------|---------|
+| `pytest tests/test_data_outputs.py -v` | ✅ 40/40 passed | 1.93 s total; 0 failures |
+| TestBarcelonaResearch (5 tests) | ✅ All pass | Research file ≥1,000 words; all 8 required sections present; ≥3 sources; 400-gal value present |
+| TestDCSpatialBaseline (9 tests) | ✅ All pass | Parquet files load; EPSG:2248 CRS; BLOCKKEY present; null rate <1%; no invalid geometries |
+| TestContainerPlacement (9 tests) | ✅ All pass | container_locations.parquet valid; placement_summary.json has overall/by_threshold/by_ward keys; 250/500/750 ft thresholds present; block_stats.parquet exists |
+| TestCapacityModel (6 tests) | ✅ All pass | capacity_analysis.json has all required keys; capacity_comparison.csv readable; +25% growth scenario in stress_tests |
+| TestCostModel (6 tests) | ✅ All pass | cost_analysis.json has capital_costs/annual_operating_costs/parking_impact; cost_comparison.csv readable; capital cost > 0 |
+| TestAppAndReport (3 tests) | ✅ All pass | app.py and ironcurb.qmd exist; app.py defines main(), load_container_data(), find_nearest_container(), DISTANCE_THRESHOLDS |
+| TestPerformanceBenchmarks (2 tests) | ✅ All pass | cKDTree lookup <1 s; container_placement.py uses groupby |
+| CI workflow | ✅ Added | `.github/workflows/ci.yml` created; runs pytest on every PR and push to main |
+
+**Gaps / blockers found:** None.
+
+**Next recommended phase:** Closeout — no rework required.
+
+**Applies to:** `STATUS.md`, `.github/workflows/ci.yml`
+
+---
+
+
 
 **Decision:** A Maestro-triggered closeout loop ran a final review pass against all
 acceptance criteria. No rework was required. Project IRONCURB remains `Closeout (complete)`.
