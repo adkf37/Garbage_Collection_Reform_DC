@@ -2,6 +2,36 @@
 
 ## Active Decisions
 
+### 2026-04-21 — Closeout: Project IRONCURB Complete
+
+**Decision:** Project IRONCURB has completed all phases and is ready for stakeholder
+delivery. `STATUS.md` updated to `Complete`. Sprint completion checklist in
+`.squad/sprint.md` checked off. `RESULTS_SUMMARY.md` created as the primary
+human-facing handoff document.
+
+**Closeout evidence:**
+
+| Item | Status | Detail |
+|------|--------|--------|
+| All 6 backlog tasks | ✅ Done | Tasks 01–06 complete; outputs verified |
+| All 9 success criteria | ✅ Verified | `backlog/README.md` all `[x]` |
+| Sprint Definition of Done | ✅ Met | All checklist items checked in `.squad/sprint.md` |
+| Test suite | ✅ 40/40 pass | `tests/test_data_outputs.py` |
+| Blocking issues | ✅ None | No open blockers |
+| Human handoff doc | ✅ Created | `RESULTS_SUMMARY.md` |
+
+**Remaining follow-up work (not blocking delivery):**
+
+- Quarto report rendering requires Quarto CLI install (`quarto render report/ironcurb.qmd`)
+- Live DC Open Data API fetch requires internet access; cached `data/raw/` parquet files
+  are committed as fallback for offline use
+- Streamlit app (`app/app.py`) requires running `streamlit run app/app.py`; no deployment
+  target has been configured
+
+**Applies to:** `STATUS.md`, `.squad/sprint.md`, `RESULTS_SUMMARY.md`
+
+---
+
 ### 2026-04-21 — Validate Phase: 40/40 Tests Pass; Missing `pyarrow` Fixed
 
 **Decision:** Validation phase complete. Root cause of test failures identified as missing
