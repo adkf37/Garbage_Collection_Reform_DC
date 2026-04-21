@@ -2,6 +2,34 @@
 
 ## Active Decisions
 
+### 2026-04-21 — Closeout (final): Project IRONCURB Ready for Handoff
+
+**Decision:** Final closeout review complete. All acceptance criteria verified against
+live artifacts. No blockers or gaps found. Phase set to `Closeout (complete)` in
+`STATUS.md`. `.squad/sprint.md` task table updated from Pending → Done to match the
+already-complete Completion Checklist.
+
+**Final review evidence:**
+
+| Item | Status | Detail |
+|------|--------|--------|
+| All 6 backlog tasks | ✅ Done | Tasks 01–06 complete; task table and checklist consistent |
+| All 9 success criteria | ✅ Verified | `backlog/README.md` all `[x]` |
+| Sprint Definition of Done | ✅ Met | All checklist items checked in `.squad/sprint.md` |
+| Test suite | ✅ 40/40 pass | `tests/test_data_outputs.py` (2.23 s) |
+| Blocking issues | ✅ None | No open blockers |
+| Human handoff doc | ✅ Current | `RESULTS_SUMMARY.md` up to date |
+| STATUS.md phase | ✅ Updated | Set to `Closeout (complete)` |
+
+**Remaining follow-up items (non-blocking):**
+- Streamlit app has no deployment target configured — runs locally only
+- Quarto report rendering requires Quarto CLI install (not in CI)
+- DC Open Data API endpoints may drift over time; `src/fetch_dc_data.py` may need updating
+
+**Applies to:** `STATUS.md`, `.squad/sprint.md`, `.squad/decisions.md`
+
+---
+
 ### 2026-04-21 — Validate Phase (Re-run): 40/40 Tests Pass; Phase → Closeout
 
 **Decision:** Validation loop re-run triggered by `copilot/validate-garbage-collection-reform`

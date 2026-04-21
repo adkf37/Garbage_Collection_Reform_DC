@@ -1,6 +1,6 @@
 # Project IRONCURB - Status
 
-## Current Phase: Complete
+## Current Phase: Closeout (complete)
 
 **Current Objective:** Project IRONCURB is complete. All 6 tasks done, all 9 success
 criteria verified, 40/40 tests pass, and all human-facing handoff docs are current.
@@ -24,6 +24,7 @@ No blocking issues remain. Ready for stakeholder delivery.
 | Reviewer | 2026-04-05 | All 9 success criteria verified against live outputs. `backlog/README.md` checkboxes marked complete. **Done** |
 | Closeout | 2026-04-21 | All tasks, success criteria, and tests verified. `RESULTS_SUMMARY.md` created. `STATUS.md` set to Complete. **Done** |
 | Validate (re-run) | 2026-04-21 | 40/40 tests pass (2.23 s). No failures, no blockers. All 9 success criteria confirmed. Phase → **Closeout**. |
+| Closeout (final) | 2026-04-21 | Final review pass complete. All backlog tasks done, sprint DoD met, no blockers. Phase set to `Closeout (complete)`. **Done** |
 
 ---
 
