@@ -2,6 +2,37 @@
 
 ## Active Decisions
 
+### 2026-04-21 — Closeout (final loop): Project IRONCURB Formally Closed
+
+**Decision:** Maestro final closeout loop completed a comprehensive review of all project
+artifacts. All acceptance criteria are met, no blockers exist, and all handoff documents
+are current. Project IRONCURB is formally closed.
+
+**Verification evidence:**
+
+| Item | Status | Detail |
+|------|--------|--------|
+| All 6 backlog tasks | ✅ Done | Tasks 01–06 complete; `.squad/sprint.md` and `STATUS.md` consistent |
+| All 9 success criteria | ✅ Verified | `backlog/README.md` — all `[x]` checked |
+| Sprint Definition of Done | ✅ Met | `.squad/sprint.md` — all checklist items `[x]` |
+| Test suite | ✅ 40/40 pass | Last run: 1.93 s (`pytest tests/test_data_outputs.py -v`) |
+| CI workflow | ✅ Active | `.github/workflows/ci.yml` enforces pytest on every PR and push to main |
+| Blocking issues | ✅ None | No open blockers |
+| Human handoff doc | ✅ Current | `RESULTS_SUMMARY.md` accurate, complete, and up to date |
+| `STATUS.md` phase | ✅ Confirmed | `Closeout (complete)` — no change required |
+
+**Remaining follow-up items (non-blocking, unchanged from previous loops):**
+- Streamlit app has no cloud deployment target — runs locally only (`streamlit run app/app.py`)
+- Quarto report rendering requires Quarto CLI to be installed separately; not tested in CI
+- DC Open Data API endpoints may drift over time; `src/fetch_dc_data.py` may need periodic updates
+
+**Outcome:** No rework required. Phase history updated in `STATUS.md`. Project is ready
+for stakeholder delivery.
+
+**Applies to:** `STATUS.md`, `.squad/decisions.md`
+
+---
+
 ### 2026-04-21 — Validate Phase (Re-run #2): 40/40 Tests Pass; CI Workflow Added; Phase → Closeout
 
 **Decision:** Second validation loop run triggered by `copilot/validate-garbage-collection-reform-again`
