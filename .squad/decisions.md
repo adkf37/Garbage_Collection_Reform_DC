@@ -2,6 +2,33 @@
 
 ## Active Decisions
 
+### 2026-04-21 — Closeout (re-confirmed): Maestro Closeout Loop Verification
+
+**Decision:** A Maestro-triggered closeout loop ran a final review pass against all
+acceptance criteria. No rework was required. Project IRONCURB remains `Closeout (complete)`.
+
+**Verification evidence:**
+
+| Item | Status | Detail |
+|------|--------|--------|
+| All 6 backlog tasks | ✅ Done | Tasks 01–06 verified complete in `STATUS.md` and `.squad/sprint.md` |
+| All 9 success criteria | ✅ Verified | `backlog/README.md` — all `[x]` |
+| Sprint Definition of Done | ✅ Met | `.squad/sprint.md` — all checklist items `[x]` |
+| Test suite | ✅ 40/40 pass | Last run: 2.23 s (`pytest tests/test_data_outputs.py -v`) |
+| Blocking issues | ✅ None | No open blockers |
+| Human handoff doc | ✅ Current | `RESULTS_SUMMARY.md` accurate and up to date |
+| STATUS.md phase | ✅ Confirmed | `Closeout (complete)` — no change needed |
+
+**Remaining follow-up items (non-blocking, unchanged):**
+- Streamlit app has no cloud deployment target — runs locally only (`streamlit run app/app.py`)
+- Quarto report requires Quarto CLI install; not verified in CI
+- DC Open Data API endpoints may drift; `src/fetch_dc_data.py` may need periodic updates
+
+**Outcome:** No changes to core artifacts. Phase history updated in `STATUS.md`.
+**Applies to:** `STATUS.md`, `.squad/decisions.md`
+
+---
+
 ### 2026-04-21 — Closeout (final): Project IRONCURB Ready for Handoff
 
 **Decision:** Final closeout review complete. All acceptance criteria verified against
