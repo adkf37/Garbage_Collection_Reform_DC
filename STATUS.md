@@ -1,14 +1,14 @@
 # Project IRONCURB - Status
 
-## Current Phase: Closeout
+## Current Phase: Complete
 
-**Current Objective:** Validation phase complete. All 40 tests pass after fixing missing
-`pyarrow` dependency. `requirements.txt` created. Project is complete and ready for
-stakeholder delivery.
+**Current Objective:** Project IRONCURB is complete. All 6 tasks done, all 9 success
+criteria verified, 40/40 tests pass, and all human-facing handoff docs are current.
+No blocking issues remain. Ready for stakeholder delivery.
 
 **Squad Template:** data_pipeline
 
-**Squad Status:** Active -- Validation phase complete; all acceptance criteria confirmed.
+**Squad Status:** Closed — all phases complete; project handed off.
 
 ---
 
@@ -22,7 +22,7 @@ stakeholder delivery.
 | Coder | 2026-04-03 | All 6 tasks implemented. Pipeline, models, app, and report complete. **Done** |
 | Tester | 2026-04-03 | 40/40 tests pass. Performance benchmarks met (<42s placement, <1ms lookup). **Done** |
 | Reviewer | 2026-04-05 | All 9 success criteria verified against live outputs. `backlog/README.md` checkboxes marked complete. **Done** |
-| Validate | 2026-04-21 | 40/40 tests pass after adding `pyarrow` to deps. `requirements.txt` created. **Done** |
+| Closeout | 2026-04-21 | All tasks, success criteria, and tests verified. `RESULTS_SUMMARY.md` created. `STATUS.md` set to Complete. **Done** |
 
 ---
 
@@ -51,7 +51,7 @@ See `.squad/sprint.md` for the full execution plan.
 
 ## Blocking Issues
 
-None — all 40 tests pass. See `.squad/decisions.md` for validation evidence.
+None — project is complete. See `RESULTS_SUMMARY.md` for handoff summary.
 
 ---
 

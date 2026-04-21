@@ -110,12 +110,12 @@ Tasks 01 and 02 are fully independent and can run in parallel.
 
 ## Completion Checklist
 
-- [ ] Task 01 - Barcelona Research DONE
-- [ ] Task 02 - DC Spatial Baseline DONE
-- [ ] Task 03 - Container Placement DONE
-- [ ] Task 04 - Capacity Model DONE
-- [ ] Task 05 - Cost & Parking Model DONE
-- [ ] Task 06 - App & Report DONE
-- [ ] Full pipeline runs end-to-end on clean machine
-- [ ] All acceptance criteria across all tasks verified by Tester
-- [ ] STATUS.md updated to reflect completion
+- [x] Task 01 - Barcelona Research DONE
+- [x] Task 02 - DC Spatial Baseline DONE
+- [x] Task 03 - Container Placement DONE
+- [x] Task 04 - Capacity Model DONE
+- [x] Task 05 - Cost & Parking Model DONE
+- [x] Task 06 - App & Report DONE
+- [x] Full pipeline runs end-to-end on clean machine
+- [x] All acceptance criteria across all tasks verified by Tester
+- [x] STATUS.md updated to reflect completion
