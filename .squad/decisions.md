@@ -2,6 +2,38 @@
 
 ## Active Decisions
 
+### 2026-04-21 — Validate Phase: 40/40 Tests Pass; Missing `pyarrow` Fixed
+
+**Decision:** Validation phase complete. Root cause of test failures identified as missing
+`pyarrow` dependency. All 40 tests now pass after installing `pyarrow`. `requirements.txt`
+created to make the full dependency set explicit. `STATUS.md` updated to "Closeout".
+
+**Validation evidence:**
+
+| Check | Result | Details |
+|-------|--------|---------|
+| `pytest tests/test_data_outputs.py -v` | ✅ 40/40 passed | Ran after `pip install pyarrow` |
+| TestBarcelonaResearch (5 tests) | ✅ All pass | Research file exists, ≥1,000 words, required sections present |
+| TestDCSpatialBaseline (7 tests) | ✅ All pass | Parquet files load; EPSG:2248 CRS; BLOCKKEY column present |
+| TestContainerPlacement (8 tests) | ✅ All pass | container_locations.parquet and placement_summary.json valid |
+| TestCapacityModel (5 tests) | ✅ All pass | capacity_analysis.json has growth scenario and structure |
+| TestCostModel (5 tests) | ✅ All pass | cost_analysis.json positive capital cost, parking section present |
+| TestAppAndReport (3 tests) | ✅ All pass | app.py and ironcurb.qmd exist; app structure correct |
+| TestPerformanceBenchmarks (2 tests) | ✅ All pass | Spatial lookup <1s; groupby optimization in place |
+
+**Root cause:** `pyarrow` is required by `geopandas` and `pandas` for reading `.parquet`
+files but was not listed as a project dependency. All parquet-reading tests failed with:
+`ImportError: Missing optional dependency 'pyarrow.parquet'`.
+
+**Fix applied:**
+- Created `requirements.txt` listing all 12 project dependencies including `pyarrow>=13.0.0`
+- Updated `AGENTS.md` to include `pyarrow` in the dependency list
+- `STATUS.md` phase advanced to `Closeout`
+
+**Applies to:** `requirements.txt`, `AGENTS.md`, `STATUS.md`
+
+---
+
 ### 2026-04-05 — Reviewer Phase: All Success Criteria Verified
 
 **Decision:** Project IRONCURB has passed the Reviewer phase. All 9 backlog success

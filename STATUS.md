@@ -1,14 +1,14 @@
 # Project IRONCURB - Status
 
-## Current Phase: Reviewer — Complete
+## Current Phase: Closeout
 
-**Current Objective:** All 9 backlog success criteria verified against live data outputs.
-All 6 tasks complete. 40/40 tests pass. Pipeline reproducible within time constraints.
-`backlog/README.md` success-criteria checkboxes updated to `[x]`. Project is complete.
+**Current Objective:** Validation phase complete. All 40 tests pass after fixing missing
+`pyarrow` dependency. `requirements.txt` created. Project is complete and ready for
+stakeholder delivery.
 
 **Squad Template:** data_pipeline
 
-**Squad Status:** Active -- Reviewer phase complete; project sign-off granted.
+**Squad Status:** Active -- Validation phase complete; all acceptance criteria confirmed.
 
 ---
 
@@ -22,6 +22,7 @@ All 6 tasks complete. 40/40 tests pass. Pipeline reproducible within time constr
 | Coder | 2026-04-03 | All 6 tasks implemented. Pipeline, models, app, and report complete. **Done** |
 | Tester | 2026-04-03 | 40/40 tests pass. Performance benchmarks met (<42s placement, <1ms lookup). **Done** |
 | Reviewer | 2026-04-05 | All 9 success criteria verified against live outputs. `backlog/README.md` checkboxes marked complete. **Done** |
+| Validate | 2026-04-21 | 40/40 tests pass after adding `pyarrow` to deps. `requirements.txt` created. **Done** |
 
 ---
 
@@ -50,7 +51,7 @@ See `.squad/sprint.md` for the full execution plan.
 
 ## Blocking Issues
 
-None.
+None — all 40 tests pass. See `.squad/decisions.md` for validation evidence.
 
 ---
 

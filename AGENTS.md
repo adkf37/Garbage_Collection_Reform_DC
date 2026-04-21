@@ -30,7 +30,9 @@ streamlit run app/app.py
 ```
 
 ### Dependencies
-The project uses: `geopandas`, `pandas`, `numpy`, `scikit-learn`, `streamlit`, `streamlit-folium`, `folium`, `pyproj`, `requests`, `scipy`
+The project uses: `geopandas`, `pandas`, `numpy`, `pyarrow`, `scikit-learn`, `streamlit`, `streamlit-folium`, `folium`, `pyproj`, `requests`, `scipy`
+
+Install all dependencies with: `pip install -r requirements.txt`
 
 ## Architecture
 
