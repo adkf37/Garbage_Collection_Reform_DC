@@ -2,6 +2,40 @@
 
 ## Active Decisions
 
+### 2026-04-21 — Validate Phase (Final Check): 40/40 Tests Pass; CI Workflow Added
+
+**Decision:** Validate phase re-run triggered by `copilot/validate-garbage-collection-reform`
+branch. All 40 acceptance-criteria tests pass with no failures. A `ci.yml` workflow was
+added so every push and pull request to `main` automatically runs the test suite via
+GitHub Actions, closing the gap that caused previous CI runs to show `action_required`.
+
+**Validation run evidence:**
+
+| Check | Result | Details |
+|-------|--------|---------|
+| `pytest tests/test_data_outputs.py -v` | ✅ 40/40 passed | 1.93 s total; 0 failures |
+| TestBarcelonaResearch (5 tests) | ✅ All pass | Research file ≥1,000 words; all 8 required sections; ≥3 sources; 400-gal value present |
+| TestDCSpatialBaseline (9 tests) | ✅ All pass | Parquet files load; EPSG:2248 CRS; BLOCKKEY present; null rate <1%; no invalid geometries |
+| TestContainerPlacement (9 tests) | ✅ All pass | container_locations.parquet valid; placement_summary.json has overall/by_threshold/by_ward; 250/500/750 ft thresholds; block_stats.parquet exists |
+| TestCapacityModel (6 tests) | ✅ All pass | capacity_analysis.json has all required keys; capacity_comparison.csv readable; +25% growth in stress_tests |
+| TestCostModel (6 tests) | ✅ All pass | cost_analysis.json has capital_costs/annual_operating_costs/parking_impact; cost_comparison.csv readable; capital cost > 0 |
+| TestAppAndReport (3 tests) | ✅ All pass | app.py and ironcurb.qmd exist; app.py defines main(), load_container_data(), find_nearest_container(), DISTANCE_THRESHOLDS |
+| TestPerformanceBenchmarks (2 tests) | ✅ All pass | cKDTree lookup <1 s; container_placement.py uses groupby |
+| CI workflow | ✅ Added | `.github/workflows/ci.yml` created; runs on push/PR to main |
+
+**Gaps / blockers found:** None.
+
+**Root cause of previous `action_required` CI status:** The `ci.yml` file was created on
+branch `copilot/implement-garbage-collection-reform` but never merged to main. GitHub
+requires workflow file approval for first-time workflow additions from non-default branches,
+which surfaced as `action_required`. Added `ci.yml` in this branch to resolve it.
+
+**Next recommended phase:** Closeout (complete) — no rework required.
+
+**Applies to:** `STATUS.md`, `.github/workflows/ci.yml`, `.squad/decisions.md`
+
+---
+
 ### 2026-04-21 — Closeout (final): Project IRONCURB Ready for Handoff
 
 **Decision:** Final closeout review complete. All acceptance criteria verified against
