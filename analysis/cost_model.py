@@ -607,6 +607,26 @@ def main():
         n_containers, n_households, pickup_frequency
     )
     
+    # Build comparison summary with net cost difference and payback period
+    annual_savings = current["annual_costs"]["total"] - operating["total_annual_operating"]
+    payback_years = (
+        capital["total_capital_cost"] / annual_savings
+        if annual_savings > 0
+        else float("inf")
+    )
+    comparison_summary = {
+        "current_annual_operating_cost": current["annual_costs"]["total"],
+        "shared_annual_operating_cost": operating["total_annual_operating"],
+        "net_annual_cost_difference": annual_savings,
+        "net_annual_cost_direction": "savings" if annual_savings > 0 else "increase",
+        "net_cost_per_household": annual_savings / n_households,
+        "shared_capital_cost": capital["total_capital_cost"],
+        "payback_period_years": payback_years,
+        "ten_year_shared_total": capital["total_capital_cost"] + operating["total_annual_operating"] * 10,
+        "ten_year_current_total": current["annual_costs"]["total"] * 10,
+        "ten_year_net_savings": current["annual_costs"]["total"] * 10 - (capital["total_capital_cost"] + operating["total_annual_operating"] * 10),
+    }
+
     # Save results
     results = {
         "inputs": {
@@ -625,7 +645,8 @@ def main():
         "capital_costs": capital,
         "annual_operating_costs": operating,
         "current_system_costs": current,
-        "parking_impact": parking
+        "parking_impact": parking,
+        "comparison": comparison_summary,
     }
     
     output_path = processed_dir / "cost_analysis.json"

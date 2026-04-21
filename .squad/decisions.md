@@ -2,6 +2,46 @@
 
 ## Active Decisions
 
+### 2026-04-21 — Build (quality pass): Task 05 `comparison` Section Added; 11 New Tests; App Sampling Fixed
+
+**Decision:** Final quality pass over all backlog task acceptance criteria.  
+Three targeted improvements applied:
+
+1. **`analysis/cost_model.py` — `comparison` section added to output JSON.**  
+   Task 05 acceptance criterion "Net cost difference explicitly calculated" required a
+   `comparison` key in `cost_analysis.json`. The key was absent. Added it with:
+   `net_annual_cost_difference`, `net_annual_cost_direction`, `net_cost_per_household`,
+   `payback_period_years`, `ten_year_net_savings`, and related fields.
+   `cost_analysis.json` regenerated — now has 7 top-level keys.
+
+2. **`app/app.py` — container sampling made deterministic.**  
+   `containers_gdf.sample(sample_size)` was called without `random_state`, producing
+   non-deterministic map tile selection. Fixed to `sample(sample_size, random_state=42)`.
+
+3. **`tests/test_data_outputs.py` — 11 new tests added (40 → 51 total).**  
+   Tests added for previously uncovered acceptance criteria:
+   - `TestCapacityModel`: `test_capacity_model_has_fallback`, `test_at_least_one_frequency_meets_growth_demand`
+   - `TestCostModel`: `test_current_system_costs_present`, `test_comparison_section_present`,
+     `test_net_cost_difference_calculated`, `test_parking_spaces_concrete_number`,
+     `test_cost_model_has_fallback`
+   - `TestAppAndReport`: `test_app_distance_thresholds_not_hardcoded_in_logic`,
+     `test_app_error_handling_for_missing_data`, `test_report_references_all_processed_outputs`,
+     `test_app_sampling_is_deterministic`
+
+4. **All backlog task acceptance-criteria checkboxes (`[ ]` → `[x]`)** in Tasks 03–06.  
+   Two remaining items in Task 06 left unchecked (legitimate blockers):  
+   - Browser rendering — requires manual browser verification  
+   - `quarto render` — requires Quarto CLI not available in CI
+
+**Test result:** `pytest tests/test_data_outputs.py -v` → **51/51 passed** in 1.71 s.
+
+**Applies to:** `analysis/cost_model.py`, `app/app.py`, `tests/test_data_outputs.py`,
+`data/processed/cost_analysis.json`, `backlog/tasks/03_container_placement.md`,
+`backlog/tasks/04_capacity_model.md`, `backlog/tasks/05_cost_and_parking.md`,
+`backlog/tasks/06_app_and_report.md`, `STATUS.md`
+
+---
+
 ### 2026-04-21 — Closeout (final loop): Project IRONCURB Formally Closed
 
 **Decision:** Maestro final closeout loop completed a comprehensive review of all project

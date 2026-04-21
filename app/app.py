@@ -194,7 +194,7 @@ def create_map(containers_gdf, center=None, zoom=None, selected_address=None,
     
     # Only show a sample if too many containers
     sample_size = min(1000, len(containers_gdf))
-    sample = containers_gdf.sample(sample_size) if len(containers_gdf) > sample_size else containers_gdf
+    sample = containers_gdf.sample(sample_size, random_state=42) if len(containers_gdf) > sample_size else containers_gdf
     
     for _, row in sample.iterrows():
         folium.CircleMarker(

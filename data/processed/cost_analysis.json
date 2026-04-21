@@ -121,5 +121,17 @@
     "spaces_in_metered_areas": 570.2187499999999,
     "annual_parking_revenue_impact": 1425546.8749999998,
     "pct_of_dc_street_parking": 22.361519607843135
+  },
+  "comparison": {
+    "current_annual_operating_cost": 51480000.0,
+    "shared_annual_operating_cost": 13322298.0,
+    "net_annual_cost_difference": 38157702.0,
+    "net_annual_cost_direction": "savings",
+    "net_cost_per_household": 119.24281875,
+    "shared_capital_cost": 106846233.33333333,
+    "payback_period_years": 2.8001223274224776,
+    "ten_year_shared_total": 240069213.3333333,
+    "ten_year_current_total": 514800000.0,
+    "ten_year_net_savings": 274730786.6666667
   }
 }

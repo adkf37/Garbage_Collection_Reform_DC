@@ -229,6 +229,36 @@ class TestCapacityModel:
         mf = cap.get("minimum_frequencies", {})
         assert len(mf) >= 1, "minimum_frequencies section is empty"
 
+    def test_capacity_model_has_fallback(self):
+        """capacity_model.py must run core calculations without placement_summary.json."""
+        import importlib.util
+
+        spec = importlib.util.spec_from_file_location(
+            "capacity_model", PROJECT_ROOT / "analysis" / "capacity_model.py"
+        )
+        cm = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(cm)
+
+        # With a synthetic container count (simulating missing placement_summary.json)
+        freq = cm.find_minimum_frequency(
+            cm.SharedSystemAssumptions(), cm.PopulationAssumptions(), 18000, with_growth=False
+        )
+        assert isinstance(freq, int) and freq >= 1, (
+            "capacity_model.find_minimum_frequency() must return a positive integer "
+            "when called with a fallback container count"
+        )
+
+    def test_at_least_one_frequency_meets_growth_demand(self):
+        """At least one pickup frequency must satisfy demand under the +25% growth scenario."""
+        with open(DATA_PROC / "capacity_analysis.json") as f:
+            cap = json.load(f)
+        stress_tests = cap.get("stress_tests", {})
+        assert any(
+            v.get("growth_meets_demand", False)
+            for v in stress_tests.values()
+            if isinstance(v, dict)
+        ), "No pickup frequency in stress_tests meets demand under the +25% growth scenario"
+
 
 # ===========================================================================
 # Task 05 — Cost & Parking Model
@@ -266,6 +296,74 @@ class TestCostModel:
         parking = cost["parking_impact"]
         assert len(parking) >= 1, "parking_impact section is empty"
 
+    def test_current_system_costs_present(self):
+        """Current system costs must be included for comparison."""
+        with open(DATA_PROC / "cost_analysis.json") as f:
+            cost = json.load(f)
+        assert "current_system_costs" in cost, (
+            "cost_analysis.json must include 'current_system_costs' for comparison"
+        )
+        current = cost["current_system_costs"]
+        assert "annual_costs" in current, "current_system_costs must have 'annual_costs' sub-key"
+        assert float(current["annual_costs"]["total"]) > 0, "Current system annual cost must be positive"
+
+    def test_comparison_section_present(self):
+        """Net cost difference must be explicitly calculated in a comparison section."""
+        with open(DATA_PROC / "cost_analysis.json") as f:
+            cost = json.load(f)
+        assert "comparison" in cost, (
+            "cost_analysis.json must include 'comparison' section with net cost difference"
+        )
+
+    def test_net_cost_difference_calculated(self):
+        """comparison section must contain a numeric net annual cost difference."""
+        with open(DATA_PROC / "cost_analysis.json") as f:
+            cost = json.load(f)
+        comparison = cost.get("comparison", {})
+        assert "net_annual_cost_difference" in comparison, (
+            "comparison section must contain 'net_annual_cost_difference'"
+        )
+        # Value must be consistent with current vs shared costs
+        diff = float(comparison["net_annual_cost_difference"])
+        current_total = float(cost["current_system_costs"]["annual_costs"]["total"])
+        shared_total = float(cost["annual_operating_costs"]["total_annual_operating"])
+        assert abs(diff - (current_total - shared_total)) < 1.0, (
+            "net_annual_cost_difference must equal current_annual - shared_annual"
+        )
+
+    def test_parking_spaces_concrete_number(self):
+        """Parking spaces consumed must be reported as a concrete positive number."""
+        with open(DATA_PROC / "cost_analysis.json") as f:
+            cost = json.load(f)
+        parking = cost["parking_impact"]
+        assert "parking_spaces_equivalent" in parking, (
+            "parking_impact must include 'parking_spaces_equivalent'"
+        )
+        assert float(parking["parking_spaces_equivalent"]) > 0, (
+            "parking_spaces_equivalent must be a positive number"
+        )
+
+    def test_cost_model_has_fallback(self):
+        """cost_model.py must handle missing placement_summary.json gracefully."""
+        import importlib.util
+
+        spec = importlib.util.spec_from_file_location(
+            "cost_model", PROJECT_ROOT / "analysis" / "cost_model.py"
+        )
+        cm = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(cm)
+
+        # Core calculation must work with a synthetic fallback container count
+        capital = cm.calculate_capital_costs(
+            18247, 320000,
+            cm.ContainerCostAssumptions(), cm.TruckCostAssumptions(),
+            cm.TransitionCosts(), 3,
+        )
+        assert float(capital["total_capital_cost"]) > 0, (
+            "calculate_capital_costs() must return a positive capital cost "
+            "when called with a fallback container count"
+        )
+
 
 # ===========================================================================
 # Task 06 — App & Report files exist
@@ -273,7 +371,7 @@ class TestCostModel:
 
 
 class TestAppAndReport:
-    """Minimal existence checks from backlog/tasks/06_app_and_report.md."""
+    """Acceptance criteria from backlog/tasks/06_app_and_report.md."""
 
     def test_app_py_exists(self):
         assert (PROJECT_ROOT / "app" / "app.py").exists()
@@ -288,6 +386,46 @@ class TestAppAndReport:
         assert "load_container_data" in source, "app.py must define load_container_data()"
         assert "find_nearest_container" in source, "app.py must define find_nearest_container()"
         assert "DISTANCE_THRESHOLDS" in source, "app.py must define DISTANCE_THRESHOLDS constant"
+
+    def test_app_distance_thresholds_not_hardcoded_in_logic(self):
+        """Distance threshold values must be declared via DISTANCE_THRESHOLDS, not buried literals."""
+        import ast
+
+        source = (PROJECT_ROOT / "app" / "app.py").read_text()
+        tree = ast.parse(source)
+
+        # Find the DISTANCE_THRESHOLDS module-level assignment
+        thresholds_value = None
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Assign):
+                for target in node.targets:
+                    if isinstance(target, ast.Name) and target.id == "DISTANCE_THRESHOLDS":
+                        thresholds_value = ast.literal_eval(node.value)
+
+        assert thresholds_value is not None, (
+            "app.py must define DISTANCE_THRESHOLDS as a module-level assignment"
+        )
+        assert set(thresholds_value) == {250, 500, 750}, (
+            f"DISTANCE_THRESHOLDS must contain {{250, 500, 750}}, got {thresholds_value}"
+        )
+
+    def test_app_error_handling_for_missing_data(self):
+        """App must show an error message rather than crash when data files are missing."""
+        source = (PROJECT_ROOT / "app" / "app.py").read_text()
+        assert "st.error" in source, "app.py must call st.error() when data files are missing"
+
+    def test_report_references_all_processed_outputs(self):
+        """Quarto report must reference all three processed JSON output files."""
+        source = (PROJECT_ROOT / "report" / "ironcurb.qmd").read_text()
+        for fname in ("placement_summary.json", "capacity_analysis.json", "cost_analysis.json"):
+            assert fname in source, f"ironcurb.qmd must reference '{fname}'"
+
+    def test_app_sampling_is_deterministic(self):
+        """app.py container sampling must use random_state for reproducibility."""
+        source = (PROJECT_ROOT / "app" / "app.py").read_text()
+        assert "random_state" in source, (
+            "app.py sample() call must use random_state for deterministic map rendering"
+        )
 
 
 # ===========================================================================

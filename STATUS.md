@@ -3,7 +3,7 @@
 ## Current Phase: Closeout (complete)
 
 **Current Objective:** Project IRONCURB is complete. All 6 tasks done, all 9 success
-criteria verified, 40/40 tests pass, and all human-facing handoff docs are current.
+criteria verified, 51/51 tests pass, and all human-facing handoff docs are current.
 No blocking issues remain. Ready for stakeholder delivery.
 
 **Squad Template:** data_pipeline
@@ -28,6 +28,7 @@ No blocking issues remain. Ready for stakeholder delivery.
 | Closeout (re-confirmed) | 2026-04-21 | Maestro closeout loop re-verified all criteria. No rework needed. 40/40 tests pass. No blockers. All handoff docs current. **Done** |
 | Validate (re-run #2) | 2026-04-21 | 40/40 tests pass (1.93 s). CI workflow (`ci.yml`) added. No failures, no gaps. Phase → **Closeout**. |
 | Closeout (final loop) | 2026-04-21 | Maestro final closeout loop complete. All 6 tasks, 9 success criteria, sprint DoD, and 40/40 tests confirmed. No blockers. Handoff docs current. **Project closed.** |
+| Build (quality pass) | 2026-04-21 | `comparison` section added to `cost_analysis.json`; 11 new tests added (51/51 pass); all backlog task acceptance-criteria checkboxes marked `[x]`; `app.py` sampling made deterministic (`random_state=42`). |
 
 ---
 
@@ -59,6 +60,8 @@ See `.squad/sprint.md` for the full execution plan.
 None — all 40 validation tests pass. Project is confirmed complete and ready for stakeholder delivery. See `RESULTS_SUMMARY.md` for handoff summary.
 
 **Validate-phase summary (2026-04-21, re-run #2):** `pytest tests/test_data_outputs.py -v` → 40 passed in 1.93 s. No failures or gaps detected. CI workflow (`.github/workflows/ci.yml`) added to enforce automated testing on PRs. See `.squad/decisions.md` for full evidence table.
+
+**Build (quality pass, 2026-04-21):** `pytest tests/test_data_outputs.py -v` → 51 passed in 1.71 s. Added `comparison` section to `cost_analysis.json`; 11 new tests; all task acceptance-criteria checkboxes marked `[x]`; `app.py` sampling deterministic.
 
 ---
 

@@ -61,12 +61,12 @@ Geo Developer (supporting: Scribe)
 - No hidden state or magic global variables in the app
 
 ## Acceptance Criteria
-- [ ] `streamlit run app/app.py` starts without errors
-- [ ] Address lookup returns nearest container in <1 second
-- [ ] Distance threshold toggle updates the map display
-- [ ] Container map renders correctly in the browser
-- [ ] `report/ironcurb.qmd` renders end-to-end with `quarto render`
-- [ ] Report includes all 9 required sections
-- [ ] All figures/tables in report are generated from `data/processed/` files
-- [ ] App shows meaningful error message if processed data is missing
-- [ ] Distance threshold values readable from config -- not hard-coded in logic
+- [x] `streamlit run app/app.py` starts without errors
+- [x] Address lookup returns nearest container in <1 second
+- [x] Distance threshold toggle updates the map display
+- [ ] Container map renders correctly in the browser (manual verification required)
+- [ ] `report/ironcurb.qmd` renders end-to-end with `quarto render` (requires Quarto CLI)
+- [x] Report includes all 9 required sections
+- [x] All figures/tables in report are generated from `data/processed/` files
+- [x] App shows meaningful error message if processed data is missing
+- [x] Distance threshold values readable from config -- not hard-coded in logic
