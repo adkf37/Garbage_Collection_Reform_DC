@@ -121,5 +121,13 @@
     "spaces_in_metered_areas": 570.2187499999999,
     "annual_parking_revenue_impact": 1425546.8749999998,
     "pct_of_dc_street_parking": 22.361519607843135
+  },
+  "comparison": {
+    "annual_savings": 38157702.0,
+    "annual_savings_per_household": 119.24281875,
+    "payback_years": 2.8001223274224776,
+    "ten_year_total_current": 514800000.0,
+    "ten_year_total_shared": 240069213.3333333,
+    "ten_year_savings": 274730786.6666667
   }
 }

@@ -625,7 +625,26 @@ def main():
         "capital_costs": capital,
         "annual_operating_costs": operating,
         "current_system_costs": current,
-        "parking_impact": parking
+        "parking_impact": parking,
+        "comparison": {
+            "annual_savings": current["annual_costs"]["total"] - operating["total_annual_operating"],
+            "annual_savings_per_household": (
+                current["annual_costs"]["total"] - operating["total_annual_operating"]
+            ) / n_households,
+            "payback_years": (
+                capital["total_capital_cost"] / max(
+                    current["annual_costs"]["total"] - operating["total_annual_operating"], 1
+                )
+            ),
+            "ten_year_total_current": current["annual_costs"]["total"] * 10,
+            "ten_year_total_shared": (
+                capital["total_capital_cost"] + operating["total_annual_operating"] * 10
+            ),
+            "ten_year_savings": (
+                current["annual_costs"]["total"] * 10
+                - (capital["total_capital_cost"] + operating["total_annual_operating"] * 10)
+            ),
+        }
     }
     
     output_path = processed_dir / "cost_analysis.json"

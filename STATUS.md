@@ -6,6 +6,14 @@
 criteria verified, 40/40 tests pass, and all human-facing handoff docs are current.
 No blocking issues remain. Ready for stakeholder delivery.
 
+**2026-04-21 Build-Phase additions (Coordinator):**
+- Added `.github/workflows/ci.yml` — GitHub Actions workflow runs `pytest tests/` on
+  every push and pull request. Tests complete in ~2 s on ubuntu-latest / Python 3.11.
+- Fixed `analysis/cost_model.py` to include a `comparison` key in `cost_analysis.json`,
+  satisfying the Task 05 acceptance criterion for that key. Regenerated output file.
+- Marked all acceptance-criteria checkboxes `[x]` in `backlog/tasks/01`–`06`.
+  All 40 tests continue to pass after these changes.
+
 **Squad Template:** data_pipeline
 
 **Squad Status:** Closed — all phases complete; project handed off.
