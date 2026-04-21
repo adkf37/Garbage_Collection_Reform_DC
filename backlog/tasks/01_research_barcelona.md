@@ -39,9 +39,9 @@ None -- this task can start immediately.
 - Do not fabricate citations -- only cite sources that can be verified
 
 ## Acceptance Criteria
-- [ ] `research/barcelona_shared_waste.md` exists with all 8 required sections
-- [ ] >=3 credible sources cited (with URLs or DOIs)
-- [ ] All assumption values feeding into Tasks 04/05 listed in "Assumptions Derived"
+- [x] `research/barcelona_shared_waste.md` exists with all 8 required sections
+- [x] >=3 credible sources cited (with URLs or DOIs)
+- [x] All assumption values feeding into Tasks 04/05 listed in "Assumptions Derived"
       table with source attribution
-- [ ] "What We Know / Don't Know" section is present and substantive
-- [ ] File is valid Markdown and renders cleanly
+- [x] "What We Know / Don't Know" section is present and substantive
+- [x] File is valid Markdown and renders cleanly

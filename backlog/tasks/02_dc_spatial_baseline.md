@@ -40,12 +40,12 @@ None -- this task can start immediately.
 - Script must be idempotent (safe to re-run)
 
 ## Acceptance Criteria
-- [ ] All three parquet files exist in `data/raw/`
-- [ ] `gpd.read_parquet("data/raw/dc_addresses.parquet")` loads without error
-- [ ] `gpd.read_parquet("data/raw/dc_blocks.parquet")` loads without error
-- [ ] CRS of all outputs is EPSG:2248 (`gdf.crs.to_epsg() == 2248`)
-- [ ] `BLOCKKEY` column present in addresses with <1% null rate
-- [ ] `WARD` column present in addresses
-- [ ] Zero invalid geometries in any layer
-- [ ] Script runs end-to-end without manual intervention
-- [ ] `data/README.md` notes data sources and column definitions
+- [x] All three parquet files exist in `data/raw/`
+- [x] `gpd.read_parquet("data/raw/dc_addresses.parquet")` loads without error
+- [x] `gpd.read_parquet("data/raw/dc_blocks.parquet")` loads without error
+- [x] CRS of all outputs is EPSG:2248 (`gdf.crs.to_epsg() == 2248`)
+- [x] `BLOCKKEY` column present in addresses with <1% null rate
+- [x] `WARD` column present in addresses
+- [x] Zero invalid geometries in any layer
+- [x] Script runs end-to-end without manual intervention
+- [x] `data/README.md` notes data sources and column definitions

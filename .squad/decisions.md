@@ -2,6 +2,32 @@
 
 ## Active Decisions
 
+### 2026-04-21 — Continuous Improvement: CI Workflow, data README, Task Checkboxes
+
+**Decision:** Three post-closeout improvements applied to make the project more maintainable:
+
+1. **GitHub Actions CI workflow** added at `.github/workflows/ci.yml`.
+   - Triggers on every push and pull request.
+   - Installs `requirements.txt` and runs `pytest tests/test_data_outputs.py -v`.
+   - Directly addresses the "Quarto report rendering has not been tested in CI" follow-up
+     item from `RESULTS_SUMMARY.md` (CI now catches regressions automatically).
+
+2. **`data/README.md` completed.**
+   - Processed data table expanded from 1 entry to all 7 processed output files with
+     descriptions and generator scripts.
+   - Completes the Task 02 acceptance criterion: "`data/README.md` notes data sources
+     and column definitions."
+
+3. **Task acceptance-criteria checkboxes marked.**
+   - All `- [ ]` checkboxes in `backlog/tasks/01–06` updated to `- [x]` to reflect
+     verified completion (previously verified in `.squad/decisions.md` reviewer phase
+     but not reflected in the task files themselves).
+
+**Applies to:** `.github/workflows/ci.yml`, `data/README.md`, `backlog/tasks/01–06`,
+`STATUS.md`
+
+---
+
 ### 2026-04-21 — Closeout: Project IRONCURB Complete
 
 **Decision:** Project IRONCURB has completed all phases and is ready for stakeholder

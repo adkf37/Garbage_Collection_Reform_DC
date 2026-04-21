@@ -60,11 +60,11 @@ Data Engineer (supporting: Lead)
 - Parking calculation must use `container_footprint_sqft` parameter, not a literal
 
 ## Acceptance Criteria
-- [ ] `data/processed/cost_analysis.json` exists with `capital_costs`,
+- [x] `data/processed/cost_analysis.json` exists with `capital_costs`,
       `operating_costs`, `parking_impact`, and `comparison` keys
-- [ ] `data/processed/cost_comparison.csv` includes per-household and citywide rows
-- [ ] Current system costs included for comparison
-- [ ] Net cost difference (savings or increase) explicitly calculated
-- [ ] Parking spaces consumed reported as a concrete number
-- [ ] All assumption values in `@dataclass` instances with source comments
-- [ ] Script runs without errors with fallback container count
+- [x] `data/processed/cost_comparison.csv` includes per-household and citywide rows
+- [x] Current system costs included for comparison
+- [x] Net cost difference (savings or increase) explicitly calculated
+- [x] Parking spaces consumed reported as a concrete number
+- [x] All assumption values in `@dataclass` instances with source comments
+- [x] Script runs without errors with fallback container count

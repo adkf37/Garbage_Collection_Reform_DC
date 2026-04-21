@@ -46,12 +46,12 @@ Geo Developer (supporting: Data Engineer)
 - Script must complete in <60 seconds on a modern laptop
 
 ## Acceptance Criteria
-- [ ] `data/processed/container_locations.parquet` exists and loads cleanly
-- [ ] `data/processed/placement_summary.json` exists with `overall`, `by_threshold`,
+- [x] `data/processed/container_locations.parquet` exists and loads cleanly
+- [x] `data/processed/placement_summary.json` exists with `overall`, `by_threshold`,
       and `by_ward` keys
-- [ ] Summary reports compliance rate for each of the three thresholds
-- [ ] Violating blocks (at 500 ft default) are identifiable from `block_stats.parquet`
-- [ ] Container CRS is EPSG:2248
-- [ ] Script runs in <60 seconds end-to-end
-- [ ] Re-running the script produces identical output (determinism check)
-- [ ] Ward-level breakdown present in summary JSON
+- [x] Summary reports compliance rate for each of the three thresholds
+- [x] Violating blocks (at 500 ft default) are identifiable from `block_stats.parquet`
+- [x] Container CRS is EPSG:2248
+- [x] Script runs in <60 seconds end-to-end
+- [x] Re-running the script produces identical output (determinism check)
+- [x] Ward-level breakdown present in summary JSON
