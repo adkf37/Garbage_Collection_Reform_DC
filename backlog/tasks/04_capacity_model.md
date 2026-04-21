@@ -44,12 +44,12 @@ All parameters live in `@dataclass` classes at the top of the script:
 - Script must run standalone (with fallback container count if placement data absent)
 
 ## Acceptance Criteria
-- [ ] `data/processed/capacity_analysis.json` exists and contains `assumptions`,
+- [x] `data/processed/capacity_analysis.json` exists and contains `assumptions`,
       `current_system_capacity`, `shared_system_by_frequency`, `stress_tests`,
       and `minimum_frequencies` keys
-- [ ] `data/processed/capacity_comparison.csv` exists and is readable
-- [ ] +25% growth scenario is explicitly reported
-- [ ] At least one pickup frequency meets demand under the growth scenario
-- [ ] All `@dataclass` fields have inline docstring comments explaining their source
-- [ ] Script runs without errors with and without `placement_summary.json` present
-- [ ] No literal numeric constants outside of the dataclass definitions
+- [x] `data/processed/capacity_comparison.csv` exists and is readable
+- [x] +25% growth scenario is explicitly reported
+- [x] At least one pickup frequency meets demand under the growth scenario
+- [x] All `@dataclass` fields have inline docstring comments explaining their source
+- [x] Script runs without errors with and without `placement_summary.json` present
+- [x] No literal numeric constants outside of the dataclass definitions

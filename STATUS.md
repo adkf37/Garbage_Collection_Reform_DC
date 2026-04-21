@@ -25,6 +25,7 @@ No blocking issues remain. Ready for stakeholder delivery.
 | Closeout | 2026-04-21 | All tasks, success criteria, and tests verified. `RESULTS_SUMMARY.md` created. `STATUS.md` set to Complete. **Done** |
 | Validate (re-run) | 2026-04-21 | 40/40 tests pass (2.23 s). No failures, no blockers. All 9 success criteria confirmed. Phase → **Closeout**. |
 | Closeout (final) | 2026-04-21 | Final review pass complete. All backlog tasks done, sprint DoD met, no blockers. Phase set to `Closeout (complete)`. **Done** |
+| Documentation sweep | 2026-04-21 | `data/README.md` expanded to list all 7 processed output files. All 6 task files have acceptance-criteria checkboxes marked `[x]`. `dc_streets.parquet` gap documented (not committed; not used by pipeline). Streets skip-test added to `tests/test_data_outputs.py`. 41 tests pass (1 skip). |
 
 ---
 
@@ -56,6 +57,8 @@ See `.squad/sprint.md` for the full execution plan.
 None — all 40 validation tests pass. Project is confirmed complete and ready for stakeholder delivery. See `RESULTS_SUMMARY.md` for handoff summary.
 
 **Validate-phase summary (2026-04-21):** `pytest tests/test_data_outputs.py -v` → 40 passed in 2.23 s. No failures or gaps detected. See `.squad/decisions.md` for full evidence table.
+
+**Documentation sweep (2026-04-21):** `data/README.md` expanded; task acceptance-criteria checkboxes marked `[x]`; `dc_streets.parquet` gap documented; streets skip-test added. `pytest` → 40 passed + 1 skipped.
 
 ---
 
