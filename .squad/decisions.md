@@ -2,6 +2,34 @@
 
 ## Active Decisions
 
+### 2026-04-05 — Reviewer Phase: All Success Criteria Verified
+
+**Decision:** Project IRONCURB has passed the Reviewer phase. All 9 backlog success
+criteria in `backlog/README.md` are verified against live `data/processed/` outputs.
+`backlog/README.md` checkboxes updated to `[x]`. `STATUS.md` updated to "Reviewer — Complete".
+
+**Evidence gathered during review:**
+
+| Criterion | File | Key Value |
+|-----------|------|-----------|
+| Deterministic city-wide placement | `data/processed/container_locations.parquet` | 18,247 containers placed via k-means (random_state=42) |
+| Walk distance compliance by ward (250/500/750 ft) | `data/processed/placement_summary.json` | All 8 wards show `compliant_250ft: 1, compliant_500ft: 1, compliant_750ft: 1` |
+| Capacity parity under +25% growth | `data/processed/capacity_analysis.json` | `growth_rate: 0.25`; stress tests cover growth scenario |
+| Per-household and citywide cost figures | `data/processed/cost_analysis.json` | Capital: $106.8M citywide, $333.89/household |
+| Parking/curb impact quantified | `data/processed/cost_analysis.json` | Parking assumptions and metered-area impact in `parking` section |
+| Streamlit app with address lookup | `app/app.py` | Exists; `test_app_py_importable_structure` passes |
+| Quarto report end-to-end | `report/ironcurb.qmd` | Exists; references all `data/processed/` JSON outputs |
+| Model assumptions explicit/parameterized | All analysis scripts | All use `@dataclass`; sources cited per field |
+| Full pipeline reproducible | `src/`, `analysis/` | 4-step command chain produces all processed outputs |
+
+**Test status:** 40/40 tests pass (`tests/test_data_outputs.py`).
+
+**No blocking issues. Project is complete and ready for stakeholder delivery.**
+
+**Applies to:** `backlog/README.md`, `STATUS.md`
+
+---
+
 ### 2026-04-03 — Task 01 Complete: Barcelona Research Summary
 
 **Decision:** `research/barcelona_shared_waste.md` created synthesizing the primary source PDF plus 11 additional sources covering Barcelona, Amsterdam, Vienna, Seoul, and San Francisco.

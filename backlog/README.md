@@ -13,15 +13,15 @@ resident walking distances within acceptable bounds.
 
 ## Success Criteria
 
-- [ ] Container placement algorithm produces a deterministic city-wide placement
-- [ ] Walking distance compliance reported for 250 / 500 / 750 ft thresholds by ward
-- [ ] Capacity model demonstrates parity with current system under a +25% growth scenario
-- [ ] Cost model produces per-household and citywide figures (capital + operating)
-- [ ] Parking/curb impact quantified
-- [ ] Interactive Streamlit app with address lookup runs locally
-- [ ] Quarto report renders end-to-end from `data/processed/` files
-- [ ] All model assumptions are explicit, parameterized, and source-cited
-- [ ] Full pipeline is reproducible via `python src/fetch_dc_data.py &&
+- [x] Container placement algorithm produces a deterministic city-wide placement
+- [x] Walking distance compliance reported for 250 / 500 / 750 ft thresholds by ward
+- [x] Capacity model demonstrates parity with current system under a +25% growth scenario
+- [x] Cost model produces per-household and citywide figures (capital + operating)
+- [x] Parking/curb impact quantified
+- [x] Interactive Streamlit app with address lookup runs locally
+- [x] Quarto report renders end-to-end from `data/processed/` files
+- [x] All model assumptions are explicit, parameterized, and source-cited
+- [x] Full pipeline is reproducible via `python src/fetch_dc_data.py &&
       python analysis/container_placement.py &&
       python analysis/capacity_model.py &&
       python analysis/cost_model.py`
